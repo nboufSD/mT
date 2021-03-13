@@ -10,9 +10,17 @@
             title: 'Some title',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {
-              miro.board.widgets.create({type: 'sticker', text: 'Hello'})
+              // miro.board.widgets.create({type: 'sticker', text: 'Hello'})
+              for (const i =0; i <= 3; i++) {
+                miro.board.widgets.create({
+                  type: "image",
+                  url: "https://nboufsd.github.io/mT/images/finger_" + String(i) + ".png",
+                  x: i * 1000,
+                  y: 0
+                })
+              }
               alert('2!')
-              const allStickers = miro.board.widgets.get({type: 'sticker'})
+              const allStickers = miro.board.widgets.get({type: 'image'})
               console.log(allStickers)
             }
           }
