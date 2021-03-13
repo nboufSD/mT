@@ -12,6 +12,8 @@
             onClick: () => {
               miro.board.widgets.create({type: 'sticker', text: 'Hello'})
               alert('2!')
+              const allStickers = await miro.board.widgets.get({type: 'sticker'})
+              console.log(allStickers)
             }
           }
         }
