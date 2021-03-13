@@ -15,6 +15,7 @@
           }
         }
       })
+      await miro.board.widgets.create({type: 'sticker', text: 'Hello'})
       miro.addListener('WIDGETS_CREATED', widget => {
         console.log(widget)
         alert('CREATED0')
