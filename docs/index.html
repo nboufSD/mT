@@ -10,8 +10,15 @@
             title: 'Some title',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {
-              miro.board.widgets.create({type: 'sticker', text: 'Hello'})
-              alert('Hi!')
+              miro.board.widgets.create({
+                "type": "sticker",
+                "x": 0,
+                "y": 0 ,
+                "width": 350,
+                "height": 228,
+                "text": "<p>Sticker</p>"
+              })
+              alert('CREATEEEEEE!')
             }
           }
         }
