@@ -28,6 +28,7 @@
                 }
               };
               req.open("GET", "https://nboufsd.github.io/mT/json/sample.json", false); // HTTPメソッドとアクセスするサーバーの　URL　を指定
+              req.responseType = 'json';
               req.send(null);
             }
           }
