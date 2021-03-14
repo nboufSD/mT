@@ -41,7 +41,7 @@
       miro.addListener('WIDGETS_CREATED', widget => {
         allStickers = miro.board.widgets.get({type: 'STICKER'})
         allStickers.then((value) => {
-          console.log(value);
+          console.log(value[0]["text"]);
           // expected output: "Success!"
         });
         console.log(allStickers)
