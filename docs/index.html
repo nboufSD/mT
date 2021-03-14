@@ -22,6 +22,9 @@
               }
               alert('IMAGE_CREATED')
               let req = new XMLHttpRequest();		  // XMLHttpRequest オブジェクトを生成する
+              req.open("GET", "https://nboufsd.github.io/mT/json/sample.json"); // HTTPメソッドとアクセスするサーバーの　URL　を指定
+              // req.responseType = 'json';
+              req.send(null);
               req.onreadystatechange = function() {		  // XMLHttpRequest オブジェクトの状態が変化した際に呼び出されるイベントハンドラ
                 if(req.readyState == 4 && req.status == 200){
                   let response = this.response;
@@ -31,9 +34,6 @@
                   alert(response);		          // 取得した JSON ファイルの中身を表示
                 }
               };
-              req.open("GET", "https://nboufsd.github.io/mT/json/sample.json", false); // HTTPメソッドとアクセスするサーバーの　URL　を指定
-              req.responseType = 'json';
-              req.send(null);
             }
           }
         }
