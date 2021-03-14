@@ -40,7 +40,11 @@
       })
       miro.addListener('WIDGETS_CREATED', widget => {
         allStickers = miro.board.widgets.get({type: 'STICKER'})
-        console.log(allStickers.result)
+        allStickers.then((value) => {
+          console.log(value);
+          // expected output: "Success!"
+        });
+        console.log(allStickers)
         alert('FINED OUT IMAGES')
       })
     })
