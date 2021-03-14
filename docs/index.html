@@ -44,7 +44,7 @@
                     response = JSON.parse(response);
                   }
 
-                  console.log(response[imageUrl]);
+                  console.log(response["imageUrl"]);
                   miro.board.widgets.create({
                     type: "image",
                     url: response["imageUrl"],
