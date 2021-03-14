@@ -11,16 +11,16 @@
             title: 'Some title',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {
-              // miro.board.widgets.create({type: 'sticker', text: 'Hello'})
-              for (let i = 1; i <= 3; i++) {
-                miro.board.widgets.create({
-                  type: "image",
-                  url: "https://nboufsd.github.io/mT/images/finger_" + String(i) + ".png",
-                  x: i * 1000,
-                  y: 0
-                })
-              }
-              alert('IMAGE_CREATED')
+              miro.board.widgets.create({type: 'sticker', text: 'https://nboufsd.github.io/mT/json/sample.json'})
+              // for (let i = 1; i <= 3; i++) {
+              //   miro.board.widgets.create({
+              //     type: "image",
+              //     url: "https://nboufsd.github.io/mT/images/finger_" + String(i) + ".png",
+              //     x: i * 1000,
+              //     y: 0
+              //   })
+              // }
+              // alert('IMAGE_CREATED')
               let req = new XMLHttpRequest();		  // XMLHttpRequest オブジェクトを生成する
               req.open("GET", "https://nboufsd.github.io/mT/json/sample.json"); // HTTPメソッドとアクセスするサーバーの　URL　を指定
               // req.responseType = 'json';
@@ -40,7 +40,7 @@
       })
       miro.addListener('WIDGETS_CREATED', widget => {
         allStickers = miro.board.widgets.get({type: 'STICKER'})
-        console.log(allStickers)
+        console.log(widget)
         alert('FINED OUT IMAGES')
       })
     })
