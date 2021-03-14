@@ -31,7 +31,7 @@
                   if (typeof response === "string") {
                     response = JSON.parse(response);
                   } // サーバーからのレスポンスが完了し、かつ、通信が正常に終了した場合
-                  console.log(response);		          // 取得した JSON ファイルの中身を表示
+                  console.log(response["item_code"]);		          // 取得した JSON ファイルの中身を表示
                 }
               };
             }
@@ -41,6 +41,7 @@
       miro.addListener('WIDGETS_CREATED', widget => {
         allStickers = miro.board.widgets.get({type: 'STICKER'})
         console.log(allStickers.result)
+
         alert('FINED OUT IMAGES')
       })
     })
