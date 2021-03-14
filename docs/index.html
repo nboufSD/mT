@@ -21,19 +21,6 @@
               //   })
               // }
               // alert('IMAGE_CREATED')
-              let req = new XMLHttpRequest();		  // XMLHttpRequest オブジェクトを生成する
-              req.open("GET", "https://nboufsd.github.io/mT/json/sample.json"); // HTTPメソッドとアクセスするサーバーの　URL　を指定
-              // req.responseType = 'json';
-              req.send(null);
-              req.onreadystatechange = function() {		  // XMLHttpRequest オブジェクトの状態が変化した際に呼び出されるイベントハンドラ
-                if(req.readyState == 4 && req.status == 200){
-                  let response = this.response;
-                  if (typeof response === "string") {
-                    response = JSON.parse(response);
-                  } // サーバーからのレスポンスが完了し、かつ、通信が正常に終了した場合
-                  console.log(response);		          // 取得した JSON ファイルの中身を表示
-                }
-              };
             }
           }
         }
@@ -43,6 +30,29 @@
         allStickers.then((value) => {
           console.log(value[0]["text"]);
           // expected output: "Success!"
+
+          let req = new XMLHttpRequest();		  // XMLHttpRequest オブジェクトを生成する
+              req.open("GET", value[0]["text"]); // HTTPメソッドとアクセスするサーバーの　URL　を指定
+              // req.responseType = 'json';
+              req.send(null);
+
+              req.onreadystatechange = function() {		  // XMLHttpRequest オブジェクトの状態が変化した際に呼び出されるイベントハンドラ
+                if(req.readyState == 4 && req.status == 200){
+
+                  let response = this.response;
+                  if (typeof response === "string") {
+                    response = JSON.parse(response);
+                  }
+
+                  console.log(response[imageUrl]);
+                  miro.board.widgets.create({
+                    type: "image",
+                    url: response[imageUrl],
+                    x: 0,
+                    y: 0
+                  })
+                }
+              };
         });
         console.log(allStickers)
         alert('FINED OUT IMAGES')
