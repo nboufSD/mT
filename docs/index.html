@@ -5,6 +5,8 @@
     <script>
     let allStickers;
     miro.onReady(() => {
+      const canvas = document.createElement("canvas");
+      document.body.appendChild(canvas);
       miro.initialize({
         extensionPoints: {
           bottomBar: {
