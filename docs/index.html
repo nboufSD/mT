@@ -6,6 +6,7 @@
     let allStickers;
     miro.onReady(() => {
       const canvas = document.getElementById('sample');
+      console.log(canvas.getContext);
       if (canvas.getContext) {
         var context = canvas.getContext('2d');
         //ここに具体的な描画内容を指定する
