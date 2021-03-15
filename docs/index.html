@@ -7,7 +7,10 @@
     let allStickers;
 
     miro.onReady(() => {
-      const canvas = document.getElementById('sample');
+      // const canvas = document.getElementById('sample');
+      const canvas = document.createElement("canvas");
+      document.body.appendChild(canvas);
+      console.log(document);
       if (canvas.getContext) {
         console.log("OK_IF");
         let context = canvas.getContext('2d');
@@ -17,7 +20,7 @@
         //左から20上から20の位置に幅50高さ50の塗りつぶしの四角形を描く
         context.fillRect(20,20,50,50);
       }
-      document.body.appendChild(canvas);
+
       // console.log(context);
       miro.initialize({
         extensionPoints: {
