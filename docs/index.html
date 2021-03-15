@@ -6,8 +6,8 @@
     let allStickers;
     miro.onReady(() => {
       const canvas = document.getElementById('sample');
-      console.log(canvas.getContext);
       if (canvas.getContext) {
+        console.log("OK_IF");
         var context = canvas.getContext('2d');
         //ここに具体的な描画内容を指定する
         //塗りスタイルに青色を指定する
