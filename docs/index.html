@@ -2,10 +2,19 @@
 <html lang="en">
 <head>
     <script src="https://miro.com/app/static/sdk.1.1.js"></script>
+    <canvas width="300" height="150" id="sample" style="background-color:yellow;"></canvas>
     <script>
     let allStickers;
     miro.onReady(() => {
-      const canvas = document.createElement("canvas");
+      const canvas = document.getElementById('sample');
+      if (canvas.getContext) {
+        var context = canvas.getContext('2d');
+        //ここに具体的な描画内容を指定する
+        //塗りスタイルに青色を指定する
+        context.fillStyle = "rgb(0, 0, 255)";
+        //左から20上から20の位置に幅50高さ50の塗りつぶしの四角形を描く
+        context.fillRect(20,20,50,50);
+      }
       document.body.appendChild(canvas);
       console.log(canvas);
       miro.initialize({
