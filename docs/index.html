@@ -69,7 +69,11 @@
     })
 
     function Example(response){
+      response["userInfo"].sort(function(a, b) {
+        return a.timeStamp - b.timeStamp;
+      });
       console.log(response["userInfo"]);
+
       for (let i = 0; i < response["userInfo"].length; i++) {
         miro.board.widgets.create({
           type: 'text',
