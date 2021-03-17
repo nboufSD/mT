@@ -70,12 +70,38 @@
 
     function Example(response){
       console.log(response);
-      // miro.board.widgets.create({
-      //   type: "image",
-      //   url: response["imageUrl"],
-      //   x: 0,
-      //   y: 0
-      // })
+      for (let i = 0; i < 3; i++) {
+        miro.board.widgets.create({
+          type: 'text',
+          text: response[i]["userName"],
+          x: 0,
+          y: 0 + 110 * i,
+        })
+        miro.board.widgets.create({
+          type: "image",
+          url: response[i]["userPhoto"],
+          x: 100,
+          y: 0 + 110 * i
+        })
+        miro.board.widgets.create({
+          type: "image",
+          url: response[i]["imageUrl"],
+          x: 210,
+          y: 0 + 150 * i
+        })
+        miro.board.widgets.create({
+          type: 'sticker',
+          text: response[i]["message"],
+          x: 210,
+          y: 10 + 150 * (i + 1),
+          width: 100,
+          height: 30,
+          style: {
+            "backgroundColor": response[i]["messageColor"]
+          }
+        })
+      }
+
       // miro.board.widgets.deleteById(value[0]["id"])
     }
     </script>
