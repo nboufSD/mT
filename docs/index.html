@@ -75,13 +75,13 @@
           type: 'text',
           text: response["userInfo"][i]["userName"],
           x: 0,
-          y: 0 + 110 * i,
+          y: 0 + 150 * i,
         })
         miro.board.widgets.create({
           type: "image",
           url: response["userInfo"][i]["userPhoto"],
           x: 100,
-          y: 0 + 110 * i
+          y: 0 + 150 * i
         })
         miro.board.widgets.create({
           type: "image",
@@ -94,8 +94,7 @@
           text: response["userInfo"][i]["message"],
           x: 210,
           y: 10 + 150 * (i + 1),
-          width: 100,
-          height: 30,
+          scale: 0.2,
           style: {
             "backgroundColor": response["userInfo"][i]["messageColor"]
           }
