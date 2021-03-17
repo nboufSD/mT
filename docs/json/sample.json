@@ -1,8 +1,31 @@
 {
-  "timeStamp": "20210314",
-  "imageUrl": "https://nboufsd.github.io/mT/images/finger_1.png",
-  "message": "sampleMessage",
-  "messageColor": "pink",
-  "id": "abcdefg",
-  "userName": "sampleName"
+  "userInfo" : [
+    {
+      "timeStamp": "1615974342",
+      "imageUrl": "https://nboufsd.github.io/mT/images/1.png",
+      "message": "userName is A",
+      "messageColor": "#008b8b",
+      "userId": "123",
+      "userPhoto": "https://nboufsd.github.io/mT/images/A.png",
+      "userName": "A"
+    },
+    {
+      "timeStamp": "1615974355",
+      "imageUrl": "https://nboufsd.github.io/mT/images/2.png",
+      "message": "userName is B",
+      "messageColor": "#deb887",
+      "userId": "456",
+      "userPhoto": "https://nboufsd.github.io/mT/images/B.png",
+      "userName": "B"
+    },
+    {
+      "timeStamp": "1615974363",
+      "imageUrl": "https://nboufsd.github.io/mT/images/3.png",
+      "message": "userName is C",
+      "messageColor": "#ff69b4",
+      "userId": "789",
+      "userPhoto": "https://nboufsd.github.io/mT/images/C.png",
+      "userName": "C"
+    }
+  ]
 }

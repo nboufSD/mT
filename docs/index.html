@@ -7,20 +7,6 @@
     let allStickers;
 
     miro.onReady(() => {
-      // const canvas = document.getElementById('sample');
-      const canvas = document.createElement("canvas");
-      document.body.appendChild(canvas);
-      console.log(document);
-      if (canvas.getContext) {
-        console.log("OK_IF");
-        let context = canvas.getContext('2d');
-        //ここに具体的な描画内容を指定する
-        //塗りスタイルに青色を指定する
-        context.fillStyle = "rgb(0, 0, 255)";
-        //左から20上から20の位置に幅50高さ50の塗りつぶしの四角形を描く
-        context.fillRect(20,20,50,50);
-      }
-
       // console.log(context);
       miro.initialize({
         extensionPoints: {
@@ -28,50 +14,79 @@
             title: 'Some title',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {
-              miro.board.widgets.create({type: 'sticker', text: 'https://nboufsd.github.io/mT/json/sample.json'})
+              // miro.board.widgets.create({type: 'sticker', text: 'https://nboufsd.github.io/mT/json/sample.json'})
+              // const url = value[0]["text"];
+              fetch("https://nboufsd.github.io/mT/json/sample.json")
+                .then((response) => {
+                    return response.json();　//ここでBodyからJSONを返す
+                })
+                .then((result) => {
+                    Example(result);  //取得したJSONデータを関数に渡す
+                })
+                .catch((e) => {
+                    console.log(e);  //エラーをキャッチし表示
+                })
             }
           }
         }
       })
+      // ボタンをトリガーにする
       miro.addListener('WIDGETS_CREATED', widget => {
         allStickers = miro.board.widgets.get({type: 'STICKER'})
         allStickers.then((value) => {
-          console.log(value[0]["text"]);
+          // 読み込むURLは決定している
+          // JSONは配列にしておき、全てのウィジェットに対するJSONを全てリストとして読みとる
+          // そのリストの最後のidをサーバーに返して、サーバーはそのid以降を次回から渡す（後日）
 
-          let req = new XMLHttpRequest();		  // XMLHttpRequest オブジェクトを生成する
-              req.open("GET", value[0]["text"]); // HTTPメソッドとアクセスするサーバーの　URL　を指定
-              req.send(null);
+          // fetchをXMLHttpRequestの代わりに使う
+          // let req = new XMLHttpRequest();		  // XMLHttpRequest オブジェクトを生成する
+          //     req.open("GET", value[0]["text"]); // HTTPメソッドとアクセスするサーバーの　URL　を指定
+          //     req.send(null);
 
-              req.onreadystatechange = function() {		  // XMLHttpRequest オブジェクトの状態が変化した際に呼び出されるイベントハンドラ
-                if(req.readyState == 4 && req.status == 200){
+          //     req.onreadystatechange = function() {		  // XMLHttpRequest オブジェクトの状態が変化した際に呼び出されるイベントハンドラ
+          //       if(req.readyState == 4 && req.status == 200){
 
-                  let response = this.response;
-                  if (typeof response === "string") {
-                    response = JSON.parse(response);
-                  }
+          //         let response = this.response;
+          //         if (typeof response === "string") {
+          //           response = JSON.parse(response);
+          //         }
 
-                  console.log(response["imageUrl"]);
-                  miro.board.widgets.create({
-                    type: "image",
-                    url: response["imageUrl"],
-                    x: 0,
-                    y: 0
-                  })
-                  miro.board.widgets.deleteById(value[0]["id"])
-                }
-              };
+          //         console.log(response["imageUrl"]);
+          //         miro.board.widgets.create({
+          //           type: "image",
+          //           url: response["imageUrl"],
+          //           x: 0,
+          //           y: 0
+          //         })
+          //         miro.board.widgets.deleteById(value[0]["id"])
+          //       }
+          //     };
         });
         console.log(allStickers);
         console.log(widget);
         alert('FINED OUT IMAGES')
       })
     })
+
+    function Example(response){
+      console.log(response);
+      // miro.board.widgets.create({
+      //   type: "image",
+      //   url: response["imageUrl"],
+      //   x: 0,
+      //   y: 0
+      // })
+      // miro.board.widgets.deleteById(value[0]["id"])
+    }
     </script>
 </head>
 <body>
-  <img src = "images/finger_1.png">
-  <img src = "images/finger_2.png">
-  <img src = "images/finger_3.png">
+  <img src = "images/1.png">
+  <img src = "images/2.png">
+  <img src = "images/3.png">
+  <img src = "images/A.png">
+  <img src = "images/B.png">
+  <img src = "images/C.png">
   HELLOW WORLD
 </body>
 </html>
