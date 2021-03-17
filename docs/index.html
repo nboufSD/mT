@@ -70,7 +70,7 @@
 
     function Example(response){
       console.log(response["userInfo"]);
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < response["userInfo"].length; i++) {
         miro.board.widgets.create({
           type: 'text',
           text: response["userInfo"][i]["userName"],
