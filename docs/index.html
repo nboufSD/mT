@@ -31,9 +31,9 @@
         }
       })
       // ボタンをトリガーにする
-      miro.addListener('WIDGETS_CREATED', widget => {
-        allStickers = miro.board.widgets.get({type: 'STICKER'})
-        allStickers.then((value) => {
+      // miro.addListener('WIDGETS_CREATED', widget => {
+      //   allStickers = miro.board.widgets.get({type: 'STICKER'})
+      //   allStickers.then((value) => {
           // 読み込むURLは決定している
           // JSONは配列にしておき、全てのウィジェットに対するJSONを全てリストとして読みとる
           // そのリストの最後のidをサーバーに返して、サーバーはそのid以降を次回から渡す（後日）
@@ -61,11 +61,11 @@
           //         miro.board.widgets.deleteById(value[0]["id"])
           //       }
           //     };
-        });
-        console.log(allStickers);
-        console.log(widget);
-        alert('FINED OUT IMAGES')
-      })
+      //   });
+      //   console.log(allStickers);
+      //   console.log(widget);
+      //   alert('FINED OUT IMAGES')
+      // })
     })
 
     function Example(response){
@@ -93,7 +93,7 @@
           type: 'sticker',
           text: response["userInfo"][i]["message"],
           x: 210,
-          y: 50 + 150 * i,
+          y: 70 + 150 * i,
           scale: 0.2,
           style: {
             "backgroundColor": response["userInfo"][i]["messageColor"]
