@@ -78,28 +78,27 @@
       const usersIds = users.map(function(user) {
         return user.userId;
       });
-      console.log(usersIds);
 
       const kindOfusersIds = usersIds.filter(function (x, i, self) {
-          console.log(self.indexOf(x));
-          console.log(i);
           return self.indexOf(x) === i;
         });
-      console.log(kindOfusersIds);
 
-      for (let i = 0; i < users.length; i++) {
+      for (let i = 0; i < kindOfusersIds.length; i++) {
         miro.board.widgets.create({
           type: 'text',
-          text: users[i]["userName"],
+          text: kindOfusersIds[i]["userName"],
           x: 0,
           y: 0 + 150 * i,
         })
         miro.board.widgets.create({
           type: "image",
-          url: users[i]["userPhoto"],
+          url: kindOfusersIds[i]["userPhoto"],
           x: 100,
           y: 0 + 150 * i
         })
+      }
+
+      for (let i = 0; i < users.length; i++) {
         miro.board.widgets.create({
           type: "image",
           url: users[i]["imageUrl"],
