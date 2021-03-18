@@ -80,9 +80,9 @@
       });
       console.log(usersIds);
 
-      const kindOfusersIds = users.filter(function(userId, index) {
-        return usersIds.indexOf(userId.id) === index;
-      });
+      const kindOfusersIds = usersIds.filter(function (x, i, self) {
+            return self.indexOf(x) === i;
+        });
       console.log(kindOfusersIds);
 
       for (let i = 0; i < users.length; i++) {
