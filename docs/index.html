@@ -98,7 +98,13 @@
         })
       }
 
-      for (let i = 0; i < users.length; i++) {
+      let tempUsers;
+
+      for (let i = 0; i < kindOfusers.length; i++) {
+        tempUsers = users.filter(user =>
+          user.userId === kindOfusers[i].userId
+        );
+        console.log(tempUsers);
         miro.board.widgets.create({
           type: "image",
           url: users[i]["imageUrl"],
