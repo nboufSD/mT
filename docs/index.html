@@ -69,38 +69,49 @@
     })
 
     function Example(response){
-      response["userInfo"].sort(function(a, b) {
+      const users = response["userInfo"];
+      users.sort(function(a, b) {
         return a.timeStamp - b.timeStamp;
       });
-      console.log(response["userInfo"]);
+      console.log(users);
 
-      for (let i = 0; i < response["userInfo"].length; i++) {
+      const usersIds = users.map(function(userId) {
+        return userId.userId;
+      });
+      console.log(usersIds);
+
+      const kindOfusersIds = users.filter(function(userId, index) {
+        return usersIds.indexOf(userId.id) === index;
+      });
+      console.log(kindOfusersIds);
+
+      for (let i = 0; i < users.length; i++) {
         miro.board.widgets.create({
           type: 'text',
-          text: response["userInfo"][i]["userName"],
+          text: users[i]["userName"],
           x: 0,
           y: 0 + 150 * i,
         })
         miro.board.widgets.create({
           type: "image",
-          url: response["userInfo"][i]["userPhoto"],
+          url: users[i]["userPhoto"],
           x: 100,
           y: 0 + 150 * i
         })
         miro.board.widgets.create({
           type: "image",
-          url: response["userInfo"][i]["imageUrl"],
+          url: users[i]["imageUrl"],
           x: 210,
           y: 0 + 150 * i
         })
         miro.board.widgets.create({
           type: 'sticker',
-          text: response["userInfo"][i]["message"],
+          text: users[i]["message"],
           x: 210,
           y: 70 + 150 * i,
           scale: 0.2,
           style: {
-            "backgroundColor": response["userInfo"][i]["messageColor"],
+            "backgroundColor": users[i]["messageColor"],
           }
         })
       }
