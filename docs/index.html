@@ -79,20 +79,20 @@
         return user.userId;
       });
 
-      const kindOfusersIds = usersIds.filter(function (x, i, self) {
-          return self.indexOf(x) === i;
-        });
+      const kindOfusers = users.filter(function(user, index) {
+        return usersIds.indexOf(user.userId) === index;
+      });
 
-      for (let i = 0; i < kindOfusersIds.length; i++) {
+      for (let i = 0; i < kindOfusers.length; i++) {
         miro.board.widgets.create({
           type: 'text',
-          text: kindOfusersIds[i]["userName"],
+          text: kindOfusers[i]["userName"],
           x: 0,
           y: 0 + 150 * i,
         })
         miro.board.widgets.create({
           type: "image",
-          url: kindOfusersIds[i]["userPhoto"],
+          url: kindOfusers[i]["userPhoto"],
           x: 100,
           y: 0 + 150 * i
         })
