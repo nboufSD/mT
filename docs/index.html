@@ -105,22 +105,24 @@
           user.userId === kindOfusers[i].userId
         );
         console.log(tempUsers);
-        miro.board.widgets.create({
-          type: "image",
-          url: users[i]["imageUrl"],
-          x: 210,
-          y: 0 + 150 * i
-        })
-        miro.board.widgets.create({
-          type: 'sticker',
-          text: users[i]["message"],
-          x: 210,
-          y: 70 + 150 * i,
-          scale: 0.2,
-          style: {
-            "backgroundColor": users[i]["messageColor"],
-          }
-        })
+        for (let j = 0; j < tempUsers.length; j++) {
+          miro.board.widgets.create({
+            type: "image",
+            url: tempUsers[i]["imageUrl"],
+            x: 210 + 110 * j,
+            y: 0 + 150 * i
+          })
+          miro.board.widgets.create({
+            type: 'sticker',
+            text: tempUsers[i]["message"],
+            x: 210 + 110 * j,
+            y: 70 + 150 * i,
+            scale: 0.2,
+            style: {
+              "backgroundColor": tempUsers[i]["messageColor"],
+            }
+          })
+        }
       }
 
       // miro.board.widgets.deleteById(value[0]["id"])
