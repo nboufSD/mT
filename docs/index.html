@@ -70,6 +70,7 @@
 
     function Example(response){
       const users = response["userInfo"];
+      const initUnixtime = 1616321772;
       users.sort(function(a, b) {
         return a.timeStamp - b.timeStamp;
       });
@@ -88,7 +89,7 @@
           type: 'text',
           width: 100,
           text: i + '',
-          x: 210 + 110 * i,
+          x: 210 + 50 + 60 * i,
           y: -100 ,
         })
       }
@@ -119,13 +120,13 @@
           miro.board.widgets.create({
             type: "image",
             url: tempUsers[j]["imageUrl"],
-            x: 210 + 110 * j,
+            x: kindOfusers[j]["timeStamp"] - initUnixtime,
             y: 0 + 150 * i
           })
           miro.board.widgets.create({
             type: 'sticker',
             text: tempUsers[j]["message"],
-            x: 210 + 110 * j,
+            x: kindOfusers[j]["timeStamp"] - initUnixtime,
             y: 70 + 150 * i,
             scale: 0.2,
             style: {
