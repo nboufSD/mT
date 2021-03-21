@@ -121,20 +121,20 @@
           miro.board.widgets.create({
             type: "image",
             url: tempUsers[j]["imageUrl"],
-            x: 210 + tempUsers[j]["timeStamp"] - initUnixtime,
+            x: 210 + Number(tempUsers[j]["timeStamp"] - initUnixtime),
             y: 0 + 150 * i
           })
           miro.board.widgets.create({
             type: 'sticker',
             text: tempUsers[j]["message"],
-            x: 210 + tempUsers[j]["timeStamp"] - initUnixtime,
+            x: 210 + Number(tempUsers[j]["timeStamp"] - initUnixtime),
             y: 70 + 150 * i,
             scale: 0.2,
             style: {
               "backgroundColor": tempUsers[j]["messageColor"],
             }
           })
-          console.log(210 + tempUsers[j]["timeStamp"] - initUnixtime);
+          console.log(210 + Number(tempUsers[j]["timeStamp"] - initUnixtime));
           // miro.addListener('WIDGETS_CREATED', widget => {
           //   allStickers = miro.board.widgets.get({type: 'STICKER'});
           //   console.log(allStickers);
