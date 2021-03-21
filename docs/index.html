@@ -89,7 +89,7 @@
           type: 'text',
           width: 100,
           text: i + '',
-          x: 210 + 50 + 60 * i,
+          x: 210 + 30 + 60 * i,
           y: -100 ,
         })
       }
@@ -120,19 +120,20 @@
           miro.board.widgets.create({
             type: "image",
             url: tempUsers[j]["imageUrl"],
-            x: kindOfusers[j]["timeStamp"] - initUnixtime,
+            x: 210 + kindOfusers[j]["timeStamp"] - initUnixtime,
             y: 0 + 150 * i
           })
           miro.board.widgets.create({
             type: 'sticker',
             text: tempUsers[j]["message"],
-            x: kindOfusers[j]["timeStamp"] - initUnixtime,
+            x: 210 + kindOfusers[j]["timeStamp"] - initUnixtime,
             y: 70 + 150 * i,
             scale: 0.2,
             style: {
               "backgroundColor": tempUsers[j]["messageColor"],
             }
           })
+          console.log(kindOfusers[j]["timeStamp"] - initUnixtime);
         }
       }
 
