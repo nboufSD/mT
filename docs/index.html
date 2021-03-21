@@ -134,11 +134,11 @@
               "backgroundColor": tempUsers[j]["messageColor"],
             }
           })
-          console.log(tempUsers[j]["timeStamp"] - initUnixtime);
-          miro.addListener('WIDGETS_CREATED', widget => {
-            allStickers = miro.board.widgets.get({type: 'STICKER'});
-            console.log(allStickers);
-          })
+          console.log(210 + tempUsers[j]["timeStamp"] - initUnixtime);
+          // miro.addListener('WIDGETS_CREATED', widget => {
+          //   allStickers = miro.board.widgets.get({type: 'STICKER'});
+          //   console.log(allStickers);
+          // })
         }
       }
 
