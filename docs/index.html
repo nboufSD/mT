@@ -119,7 +119,7 @@
           width: 100,
           text: dateTime.toLocaleTimeString() + '',
           x: 210 + 50 + intervalTime * i,
-          y: -100 - (( i + 2 ) % 2) === 0 ? 50 : 0,
+          y: (( i + 2 ) % 2) === 0 ? -150 : -100,
         })
       }
 
