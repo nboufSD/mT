@@ -8,6 +8,9 @@
 
     miro.onReady(() => {
       // console.log(context);
+      miro.addListener('WIDGETS_CREATED', widget => {
+          console.log(widget)
+        })
       miro.initialize({
         extensionPoints: {
           bottomBar: {
@@ -70,7 +73,7 @@
 
     function Example(response){
       const users = response["userInfo"];
-      const initUnixtime = 1616321772;
+
       users.sort(function(a, b) {
         return a.timeStamp - b.timeStamp;
       });
@@ -83,17 +86,6 @@
       const kindOfusers = users.filter(function(user, index) {
         return usersIds.indexOf(user.userId) === index;
       });
-
-      for (let i = 0; i < 30; i++) {
-        miro.board.widgets.create({
-          type: 'text',
-          width: 100,
-          text: i + '',
-          x: 210 + 30 + 60 * i,
-          y: -100 ,
-        })
-        console.log(210 + 30 + 60 * i);
-      }
 
       for (let i = 0; i < kindOfusers.length; i++) {
         miro.board.widgets.create({
@@ -111,30 +103,43 @@
       }
 
       let tempUsers;
+      const initUnixtime = 1616321772;
+      const maxTimestamp = Math.max.apply(null,users.map(x => x.timeStamp));
+      const intervalTime = ( maxTimestamp - initUnixtime ) / 30;
+      console.log(maxTimestamp);
+
+      for (let i = 0; i < 30; i++) {
+        miro.board.widgets.create({
+          type: 'text',
+          width: 100,
+          text: intervalTime * i + '',
+          x: 210 + 30 + intervalTime * i,
+          y: -100,
+        })
+      }
 
       for (let i = 0; i < kindOfusers.length; i++) {
         tempUsers = users.filter(user =>
           user.userId === kindOfusers[i].userId
         );
-        console.log(tempUsers);
         for (let j = 0; j < tempUsers.length; j++) {
           miro.board.widgets.create({
             type: "image",
             url: tempUsers[j]["imageUrl"],
-            x: 210 + Number(tempUsers[j]["timeStamp"] - initUnixtime),
-            y: 0 + 150 * i
+            x: 210 + (Number(tempUsers[j]["timeStamp"] - initUnixtime) / Number( maxTimestamp - initUnixtime )) * intervalTime,
+            y: 0 + 150 * i,
           })
           miro.board.widgets.create({
             type: 'sticker',
             text: tempUsers[j]["message"],
-            x: 210 + Number(tempUsers[j]["timeStamp"] - initUnixtime),
+            x: 210 + (Number(tempUsers[j]["timeStamp"] - initUnixtime) / Number( maxTimestamp - initUnixtime )) * intervalTime,
             y: 70 + 150 * i,
             scale: 0.2,
             style: {
               "backgroundColor": tempUsers[j]["messageColor"],
             }
           })
-          console.log(210 + Number(tempUsers[j]["timeStamp"] - initUnixtime));
+          // console.log(210 + Number(tempUsers[j]["timeStamp"] - initUnixtime));
           // miro.addListener('WIDGETS_CREATED', widget => {
           //   allStickers = miro.board.widgets.get({type: 'STICKER'});
           //   console.log(allStickers);
