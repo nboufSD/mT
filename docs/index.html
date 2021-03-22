@@ -109,12 +109,16 @@
       console.log(maxTimestamp);
       console.log(intervalTime);
 
+      let dateTime;
+      let unixtime;
       for (let i = 0; i < 30; i++) {
+        unixtime = initUnixtime + Math.floor(intervalTime * i);
+        dateTime = new Date(unixtime * 1000);
         miro.board.widgets.create({
           type: 'text',
           width: 100,
-          text: intervalTime * i + '',
-          x: 210 + 30 + intervalTime * i,
+          text: dateTime.toLocaleTimeString() + '',
+          x: 210 + 50 + intervalTime * i,
           y: -100,
         })
       }
