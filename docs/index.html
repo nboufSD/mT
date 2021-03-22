@@ -107,6 +107,7 @@
       const maxTimestamp = Math.max.apply(null,users.map(x => x.timeStamp));
       const intervalTime = ( maxTimestamp - initUnixtime ) / 30;
       console.log(maxTimestamp);
+      console.log(intervalTime);
 
       for (let i = 0; i < 30; i++) {
         miro.board.widgets.create({
@@ -126,13 +127,13 @@
           miro.board.widgets.create({
             type: "image",
             url: tempUsers[j]["imageUrl"],
-            x: 210 + (Number(tempUsers[j]["timeStamp"] - initUnixtime) / Number( maxTimestamp - initUnixtime )) * intervalTime,
+            x: 210 + Number(tempUsers[j]["timeStamp"] - initUnixtime) ,
             y: 0 + 150 * i,
           })
           miro.board.widgets.create({
             type: 'sticker',
             text: tempUsers[j]["message"],
-            x: 210 + (Number(tempUsers[j]["timeStamp"] - initUnixtime) / Number( maxTimestamp - initUnixtime )) * intervalTime,
+            x: 210 + Number(tempUsers[j]["timeStamp"] - initUnixtime),
             y: 70 + 150 * i,
             scale: 0.2,
             style: {
