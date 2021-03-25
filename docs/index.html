@@ -140,7 +140,9 @@
             x: 210 + Number(tempUsers[j]["timeStamp"] - initUnixtime),
             y: 70 + 150 * i,
             scale: 0.2,
-            backgroundColor: tempUsers[j]["messageColor"],
+            style: {
+              backgroundColor: tempUsers[j]["messageColor"],
+            }
           })
           // console.log(210 + Number(tempUsers[j]["timeStamp"] - initUnixtime));
           // miro.addListener('WIDGETS_CREATED', widget => {
