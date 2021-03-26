@@ -22,7 +22,7 @@
               const url = location.href;
               const boardId = url.substring( 17, 29 );
               console.log(boardId);
-              await miro.board.info.get()().then((jwt) =>{
+              miro.board.info.get()().then((jwt) =>{
                 console.log('jwt token', jwt);
               })
               // miro.board.widgets.create({type: 'sticker', text: 'https://nboufsd.github.io/mT/json/sample.json'})
