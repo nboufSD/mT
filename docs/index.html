@@ -98,14 +98,14 @@
           miro.board.widgets.create({
             type: "image",
             url: tempUsers[j]["imageUrl"],
-            x: 210 + Number(tempUsers[j]["timeStamp"] - initUnixtime) ,
+            x: 210 + 50 + Number(tempUsers[j]["timeStamp"] - initUnixtime) ,
             y: 0 + 150 * i,
           })
           console.log(new Date(tempUsers[j]["timeStamp"] * 1000));
           miro.board.widgets.create({
             type: 'sticker',
             text: tempUsers[j]["message"],
-            x: 210 + Number(tempUsers[j]["timeStamp"] - initUnixtime),
+            x: 210 + 50 + Number(tempUsers[j]["timeStamp"] - initUnixtime),
             y: 70 + 150 * i,
             scale: 0.2,
             style: {
