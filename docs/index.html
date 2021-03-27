@@ -77,13 +77,15 @@
       let dateTime;
       let unixtime;
       for (let i = 0; i < 30; i++) {
-        unixtime = initUnixtime + Math.floor(intervalTime * i);
+        // unixtime = initUnixtime + Math.floor(intervalTime * i);
+        unixtime = initUnixtime + Math.floor(60 * i);
         dateTime = new Date(unixtime * 1000);
         miro.board.widgets.create({
           type: 'text',
           width: 100,
           text: dateTime.toLocaleTimeString() + '',
-          x: 210 + 50 + intervalTime * i,
+          // x: 210 + 50 + intervalTime * i,
+          x: 210 + 50 + 60 * i,
           y: (( i + 2 ) % 2) === 0 ? -150 : -100,
         })
       }
@@ -99,6 +101,7 @@
             x: 210 + Number(tempUsers[j]["timeStamp"] - initUnixtime) ,
             y: 0 + 150 * i,
           })
+          console.log(210 + Number(tempUsers[j]["timeStamp"] - initUnixtime));
           miro.board.widgets.create({
             type: 'sticker',
             text: tempUsers[j]["message"],
