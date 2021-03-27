@@ -82,12 +82,12 @@
         dateTime = new Date(unixtime * 1000);
         miro.board.widgets.create({
           type: 'text',
-          width: 100,
+          // width: 100,
           x: 210 + 50 + 60 * i,
           y: (( i + 2 ) % 2) === 0 ? -150 : -100,
           style: {
             // allowed values: "center", "right", "left"
-            TextAlign: "r", // default: "center"
+            textAlign: "right", // default: "center"
           },
           // text: dateTime.toLocaleTimeString() + '',
           text: "a",
