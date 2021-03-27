@@ -101,7 +101,7 @@
             x: 210 + Number(tempUsers[j]["timeStamp"] - initUnixtime) ,
             y: 0 + 150 * i,
           })
-          console.log(210 + Number(tempUsers[j]["timeStamp"] - initUnixtime));
+          console.log(new Date(tempUsers[j]["timeStamp"] * 1000));
           miro.board.widgets.create({
             type: 'sticker',
             text: tempUsers[j]["message"],
