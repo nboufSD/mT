@@ -83,14 +83,14 @@
         miro.board.widgets.create({
           type: 'text',
           width: 100,
-          text: dateTime.toLocaleTimeString() + '',
-          // x: 210 + 50 + intervalTime * i,
           x: 210 + 50 + 60 * i,
           y: (( i + 2 ) % 2) === 0 ? -150 : -100,
           style: {
             // allowed values: "center", "right", "left"
             TextAlign: "r", // default: "center"
           },
+          text: dateTime.toLocaleTimeString() + '',
+          // x: 210 + 50 + intervalTime * i,
         })
       }
 
