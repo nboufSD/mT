@@ -20,7 +20,8 @@
               miro.board.info.get().then((id) =>{
                 console.log('boardId', id);
               })
-              fetch("https://nboufsd.github.io/mT/json/sample.json")
+              // fetch("https://nboufsd.github.io/mT/json/sample.json")
+              fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + "0" + "&boardId=" + "o9J_lMhqF7Q=")
                 .then((response) => {
                     return response.json();　//ここでBodyからJSONを返す
                 })
@@ -37,39 +38,40 @@
     })
 
     function Example(response){
-      const users = response["userInfo"];
+      // const users = response["userInfo"];
+      const users = response;
 
-      users.sort(function(a, b) {
-        return a.timeStamp - b.timeStamp;
-      });
+      // users.sort(function(a, b) {
+      //   return a.timeStamp - b.timeStamp;
+      // });
       console.log(users);
 
       const usersIds = users.map(function(user) {
-        return user.userId;
+        return user.peerId;
       });
 
       const kindOfusers = users.filter(function(user, index) {
-        return usersIds.indexOf(user.userId) === index;
+        return usersIds.indexOf(user.peerId) === index;
       });
 
       for (let i = 0; i < kindOfusers.length; i++) {
         miro.board.widgets.create({
           type: 'text',
-          text: kindOfusers[i]["userName"],
+          text: kindOfusers[i]["nickname"],
           x: 0,
           y: 0 + 150 * i,
         })
-        miro.board.widgets.create({
-          type: "image",
-          url: kindOfusers[i]["userPhoto"],
-          x: 100,
-          y: 0 + 150 * i
-        })
+        // miro.board.widgets.create({
+        //   type: "image",
+        //   url: kindOfusers[i]["userPhoto"],
+        //   x: 100,
+        //   y: 0 + 150 * i
+        // })
       }
 
       let tempUsers;
-      const initUnixtime = 1616321772;
-      const maxTimestamp = Math.max.apply(null,users.map(x => x.timeStamp));
+      const initUnixtime = kindOfusers[0]["time"];
+      const maxTimestamp = Math.max.apply(null,users.map(x => x.time));
       const intervalTime = ( maxTimestamp - initUnixtime ) / 30;
       console.log(maxTimestamp);
       console.log(intervalTime);
@@ -97,26 +99,26 @@
 
       for (let i = 0; i < kindOfusers.length; i++) {
         tempUsers = users.filter(user =>
-          user.userId === kindOfusers[i].userId
+          user.peerId === kindOfusers[i].peerId
         );
         for (let j = 0; j < tempUsers.length; j++) {
           miro.board.widgets.create({
             type: "image",
-            url: tempUsers[j]["imageUrl"],
-            x: 210 + 50 + Number(tempUsers[j]["timeStamp"] - initUnixtime) ,
+            url: tempUsers[j]["image"],
+            x: 210 + 50 + Number(tempUsers[j]["time"] - initUnixtime) ,
             y: 0 + 150 * i,
           })
-          console.log(new Date(tempUsers[j]["timeStamp"] * 1000));
-          miro.board.widgets.create({
-            type: 'sticker',
-            text: tempUsers[j]["message"],
-            x: 210 + 50 + Number(tempUsers[j]["timeStamp"] - initUnixtime),
-            y: 70 + 150 * i,
-            scale: 0.2,
-            style: {
-              stickerBackgroundColor: tempUsers[j]["messageColor"],
-            }
-          })
+          console.log(new Date(tempUsers[j]["time"] * 1000));
+          // miro.board.widgets.create({
+          //   type: 'sticker',
+          //   text: tempUsers[j]["message"],
+          //   x: 210 + 50 + Number(tempUsers[j]["time"] - initUnixtime),
+          //   y: 70 + 150 * i,
+          //   scale: 0.2,
+          //   style: {
+          //     stickerBackgroundColor: tempUsers[j]["messageColor"],
+          //   }
+          // })
         }
       }
     }
