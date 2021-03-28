@@ -106,7 +106,7 @@
         miro.board.widgets.create({
           type: 'text',
           width: 55,
-          x: 210 + 50 + 600 * i,
+          x: 210 + 50 + 600 * i * 30,
           y: -100,
           // y: (( i + 2 ) % 2) === 0 ? -150 : -100,
           // style: {
@@ -128,7 +128,7 @@
           miro.board.widgets.create({
             type: "image",
             url: tempUsers[j]["image"],
-            x: 210 + 50 + Number((tempUsers[j]["time"] - initUnixtime) / 1000) ,
+            x: 210 + 50 + Number((tempUsers[j]["time"] - initUnixtime) / 1000) * 30 ,
             y: 0 + 350 * i,
             scale: 0.2,
             metadata: {
