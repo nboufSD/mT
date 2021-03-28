@@ -64,13 +64,13 @@
           type: 'text',
           text: kindOfusers[i]["nickname"],
           x: 0,
-          y: 0 + 150 * i,
+          y: 0 + 350 * i,
         })
         // miro.board.widgets.create({
         //   type: "image",
         //   url: kindOfusers[i]["userPhoto"],
         //   x: 100,
-        //   y: 0 + 150 * i
+        //   y: 0 + 350 * i
         // })
       }
 
@@ -111,8 +111,8 @@
             type: "image",
             url: tempUsers[j]["image"],
             x: 210 + 50 + Number((tempUsers[j]["time"] - initUnixtime) / 1000) ,
-            y: 0 + 150 * i,
-            scale: 0.5,
+            y: 0 + 350 * i,
+            scale: 0.2,
           })
           console.log(new Date(tempUsers[j]["time"]));
           // miro.board.widgets.create({
