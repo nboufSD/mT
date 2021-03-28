@@ -44,7 +44,12 @@
 
     function Example(response){
       // const users = response["userInfo"];
-      const users = response;
+      let users;
+      if (!users){
+        users = response;
+      } else {
+        users = users.concat(response);
+      }
 
       // users.sort(function(a, b) {
       //   return a.timeStamp - b.timeStamp;
@@ -75,6 +80,8 @@
         //   y: 0 + 350 * i
         // })
       }
+
+      console.log(kindOfusers);
 
       let tempUsers;
       let initUnixtime;
