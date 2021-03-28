@@ -86,10 +86,7 @@
       let tempUsers;
       let initUnixtime;
       if (!maxTimestamp) {
-        initUnixtime = kindOfusers[0]["time"];
-      }
-      if (users.length === 0) {
-        return;
+        initUnixtime = users[0]["time"];
       }
       maxTimestamp = Math.max.apply(null,users.map(x => x.time));
       const intervalTime = maxTimestamp - initUnixtime;
@@ -113,16 +110,19 @@
           //   textAlign: "right", // default: "center"
           // },
           text: dateTime.toLocaleTimeString().substr( 0, 5 ) + '',
-          // text: "a",
-          // x: 210 + 50 + intervalTime * i,
         })
       }
+
+      const tempUsersLength = [];
 
       for (let i = 0; i < kindOfusers.length; i++) {
         tempUsers = users.filter(user =>
           user.peerId === kindOfusers[i].peerId
         );
         for (let j = 0; j < tempUsers.length; j++) {
+          if (tempUsersLength.length !== 0 && tempUsersLength[i] > j) {
+            continue;
+          }
           miro.board.widgets.create({
             type: "image",
             url: tempUsers[j]["image"],
@@ -130,7 +130,8 @@
             y: 0 + 350 * i,
             scale: 0.2,
           })
-          console.log(new Date(tempUsers[j]["time"]));
+          // console.log(new Date(tempUsers[j]["time"]));
+          console.log(tempUsersLength);
           // miro.board.widgets.create({
           //   type: 'sticker',
           //   text: tempUsers[j]["message"],
@@ -141,6 +142,7 @@
           //     stickerBackgroundColor: tempUsers[j]["messageColor"],
           //   }
           // })
+          tempUsersLength.push(tempUsers.length);
         }
       }
     }
