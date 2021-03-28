@@ -90,15 +90,9 @@
         initUnixtime = users[0]["time"];
       }
       // const allStickers = miro.board.widgets.get({type: 'image'})
-      miro.board.widgets.get({type: 'image'}).then((array) =>{
-        const existTimes = array.map(function(image) {
-        return image["metadata"]["3074457356456340435"]["time"];
-      });
-        console.log("allStickers");
-        console.log(existTimes);
-      })
 
       maxTimestamp = Math.max.apply(null,users.map(x => x.time));
+
       const intervalTime = maxTimestamp - initUnixtime;
       console.log(maxTimestamp);
       console.log(intervalTime);
@@ -107,8 +101,8 @@
       let unixtime;
       for (let i = 0; i < intervalTime / 600000 ; i++) {
         // unixtime = initUnixtime + Math.floor(intervalTime * i);
-        unixtime = initUnixtime /1000 + Math.floor(600 * i);
-        dateTime = new Date(unixtime / 1000);
+        unixtime = initUnixtime + Math.floor(600000 * i);
+        dateTime = new Date(unixtime);
         miro.board.widgets.create({
           type: 'text',
           width: 55,
@@ -119,7 +113,7 @@
             // allowed values: "center", "right", "left"
           //   textAlign: "right", // default: "center"
           // },
-          text: dateTime.toLocaleTimeString().substr( 0, 5 ) + '',
+          text: dateTime.toLocaleTimeString() + '',
         })
       }
 
@@ -159,6 +153,14 @@
         }
         tempUsersLength[i] = (tempUsers.length);
       }
+      miro.board.widgets.get({type: 'image'}).then((array) =>{
+        const existTimes = array.map(function(image) {
+        return image["metadata"]["3074457356456340435"]["time"];
+      });
+        console.log("allStickers");
+        console.log(existTimes);
+        maxTimestamp = Math.max.apply(null,existTimes);
+      })
     }
     </script>
 </head>
