@@ -92,7 +92,7 @@
       // const allStickers = miro.board.widgets.get({type: 'image'})
       miro.board.widgets.get({type: 'image'}).then((array) =>{
         const existTimes = array.map(function(image) {
-        return image.metadata;
+        return image.metadata.time;
       });
         console.log("allStickers");
         console.log(existTimes);
