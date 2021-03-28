@@ -12,6 +12,7 @@
     let tempUsers;
     let initUnixtime;
     let usersIds;
+    let errorIndex;
 
     miro.onReady(() => {
       miro.addListener('WIDGETS_CREATED', widget => {
@@ -139,6 +140,7 @@
           })
           .catch((e) => {
                       console.log(e);  //エラーをキャッチし表示
+                      errorIndex = j;
                   })
           // console.log(new Date(tempUsers[j]["time"]));
           // console.log(tempUsersLength);
@@ -154,7 +156,10 @@
           //   }
           // })
         }
-        tempUsersLength[i] = (tempUsers.length);
+        tempUsersLength[i] = (tempUsers.length) - errorIndex ? j : 0;
+        if (errorIndex) {
+          errorIndex = null;
+        }
       }
       miro.board.widgets.get({type: 'image'}).then((array) =>{
         const existTimes = array.map(function(image) {
