@@ -31,7 +31,7 @@
               // fetch("https://nboufsd.github.io/mT/json/sample.json")
               console.log("maxTimestamp");
               console.log(maxTimestamp);
-              fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + "o9J_lMhqF7Q=")
+              fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId)
                 .then((response) => {
                     return response.json();　//ここでBodyからJSONを返す
                 })
@@ -53,14 +53,9 @@
       if (!users){
         users = response;
       } else {
-        console.log(users);
         users = users.concat(response);
         console.log(users);
       }
-
-      // users.sort(function(a, b) {
-      //   return a.timeStamp - b.timeStamp;
-      // });
       console.log(users);
 
       usersIds = users.map(function(user) {
@@ -131,6 +126,11 @@
             x: 210 + 50 + Number((tempUsers[j]["time"] - initUnixtime) / 1000) ,
             y: 0 + 350 * i,
             scale: 0.2,
+            metadata: {
+              "sample": {
+                "time": tempUsers[j]["time"]
+              }
+            }
           })
           // console.log(new Date(tempUsers[j]["time"]));
           console.log(tempUsersLength);
