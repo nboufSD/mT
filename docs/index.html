@@ -81,6 +81,9 @@
       if (!maxTimestamp) {
         initUnixtime = kindOfusers[0]["time"];
       }
+      if (users.length === 0) {
+        return;
+      }
       maxTimestamp = Math.max.apply(null,users.map(x => x.time));
       const intervalTime = maxTimestamp - initUnixtime;
       console.log(maxTimestamp);
