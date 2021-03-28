@@ -24,9 +24,9 @@
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {
               console.log(miro.board.info.get());
-              miro.board.info.get().then((id) =>{
-                console.log('boardId', id);
-                boardId = id;
+              miro.board.info.get().then((board) =>{
+                console.log('boardId', board.id);
+                boardId = board.id;
               })
               // fetch("https://nboufsd.github.io/mT/json/sample.json")
               console.log("maxTimestamp");
