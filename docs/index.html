@@ -156,7 +156,7 @@
           //   }
           // })
         }
-        tempUsersLength[i] = (tempUsers.length) - errorIndex ? j : 0;
+        tempUsersLength[i] = errorIndex ? j : tempUsers.length;
         if (errorIndex) {
           errorIndex = null;
         }
