@@ -5,6 +5,7 @@
     <canvas width="300" height="150" id="sample" style="background-color:yellow;"></canvas>
     <script>
     let allStickers;
+    let boardId;
     let maxTimestamp = 0;
 
     miro.onReady(() => {
@@ -20,7 +21,7 @@
               console.log(miro.board.info.get());
               miro.board.info.get().then((id) =>{
                 console.log('boardId', id);
-                const boardId = id;
+                boardId = id;
               })
               // fetch("https://nboufsd.github.io/mT/json/sample.json")
               console.log("maxTimestamp");
