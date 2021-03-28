@@ -119,7 +119,7 @@
           user.peerId === kindOfusers[i].peerId
         );
         for (let j = 0; j < tempUsers.length; j++) {
-          if (tempUsersLength.length !== 0 && tempUsersLength[i] > j) {
+          if (tempUsersLength[i] > j) {
             continue;
           }
           miro.board.widgets.create({
@@ -142,7 +142,7 @@
           //     stickerBackgroundColor: tempUsers[j]["messageColor"],
           //   }
           // })
-          tempUsersLength.push(tempUsers.length);
+          tempUsersLength[i] = (tempUsers.length);
         }
       }
     }
