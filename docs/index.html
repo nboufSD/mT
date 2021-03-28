@@ -5,6 +5,7 @@
     <canvas width="300" height="150" id="sample" style="background-color:yellow;"></canvas>
     <script>
     let allStickers;
+    let maxTimestamp = 0;
 
     miro.onReady(() => {
       miro.addListener('WIDGETS_CREATED', widget => {
@@ -19,9 +20,12 @@
               console.log(miro.board.info.get());
               miro.board.info.get().then((id) =>{
                 console.log('boardId', id);
+                const boardId = id;
               })
               // fetch("https://nboufsd.github.io/mT/json/sample.json")
-              fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + "0" + "&boardId=" + "o9J_lMhqF7Q=")
+              console.log("maxTimestamp");
+              console.log(maxTimestamp);
+              fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId)
                 .then((response) => {
                     return response.json();　//ここでBodyからJSONを返す
                 })
@@ -71,7 +75,7 @@
 
       let tempUsers;
       const initUnixtime = kindOfusers[0]["time"];
-      const maxTimestamp = Math.max.apply(null,users.map(x => x.time));
+      maxTimestamp = Math.max.apply(null,users.map(x => x.time));
       const intervalTime = maxTimestamp - initUnixtime;
       console.log(maxTimestamp);
       console.log(intervalTime);
@@ -107,6 +111,7 @@
             url: tempUsers[j]["image"],
             x: 210 + 50 + Number((tempUsers[j]["time"] - initUnixtime) / 1000) ,
             y: 0 + 150 * i,
+            scale: 0.5,
           })
           console.log(new Date(tempUsers[j]["time"]));
           // miro.board.widgets.create({
