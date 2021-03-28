@@ -27,24 +27,22 @@
               miro.board.info.get().then((board) =>{
                 console.log('boardId', board.id);
                 boardId = board.id;
+                console.log("maxTimestamp");
+                console.log(maxTimestamp);
+                console.log("URL");
+                console.log("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId);
+                fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId)
+                  .then((response) => {
+                      return response.json();　//ここでBodyからJSONを返す
+                  })
+                  .then((result) => {
+                      Example(result);  //取得したJSONデータを関数に渡す
+                  })
+                  .catch((e) => {
+                      console.log(e);  //エラーをキャッチし表示
+                  })
               })
               // fetch("https://nboufsd.github.io/mT/json/sample.json")
-              console.log("boardId");
-              console.log(boardId);
-              console.log("maxTimestamp");
-              console.log(maxTimestamp);
-              console.log("URL");
-              console.log("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId);
-              fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId)
-                .then((response) => {
-                    return response.json();　//ここでBodyからJSONを返す
-                })
-                .then((result) => {
-                    Example(result);  //取得したJSONデータを関数に渡す
-                })
-                .catch((e) => {
-                    console.log(e);  //エラーをキャッチし表示
-                })
             }
           }
         }
