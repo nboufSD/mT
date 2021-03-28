@@ -31,6 +31,8 @@
               // fetch("https://nboufsd.github.io/mT/json/sample.json")
               console.log("maxTimestamp");
               console.log(maxTimestamp);
+              console.log("URL");
+              console.log("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId);
               fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId)
                 .then((response) => {
                     return response.json();　//ここでBodyからJSONを返す
@@ -81,7 +83,7 @@
         // })
       }
 
-      console.log(kindOfusers);
+      // console.log(kindOfusers);
 
 
       if (!maxTimestamp) {
