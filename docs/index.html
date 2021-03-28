@@ -7,6 +7,7 @@
     let allStickers;
     let boardId;
     let maxTimestamp = 0;
+    const tempUsersLength = [];
 
     miro.onReady(() => {
       miro.addListener('WIDGETS_CREATED', widget => {
@@ -113,8 +114,6 @@
         })
       }
 
-      const tempUsersLength = [];
-
       for (let i = 0; i < kindOfusers.length; i++) {
         tempUsers = users.filter(user =>
           user.peerId === kindOfusers[i].peerId
@@ -132,6 +131,7 @@
           })
           // console.log(new Date(tempUsers[j]["time"]));
           console.log(tempUsersLength);
+          console.log(tempUsers);
           // miro.board.widgets.create({
           //   type: 'sticker',
           //   text: tempUsers[j]["message"],
