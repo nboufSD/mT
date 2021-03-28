@@ -133,11 +133,11 @@
             x: 210 + 50 + Number((tempUsers[j]["time"] - initUnixtime) / 1000) ,
             y: 0 + 350 * i,
             scale: 0.2,
-            // metadata: {
-            //   "sample": {
-            //     "time": tempUsers[j]["time"]
-            //   }
-            // },
+            metadata: {
+              "3074457356456340435": {
+                "time": tempUsers[j]["time"]
+              }
+            },
           })
           // console.log(new Date(tempUsers[j]["time"]));
           console.log(tempUsersLength);
