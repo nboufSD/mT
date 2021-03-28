@@ -137,9 +137,12 @@
               }
             },
           })
+          .catch((e) => {
+                      console.log(e);  //エラーをキャッチし表示
+                  })
           // console.log(new Date(tempUsers[j]["time"]));
-          console.log(tempUsersLength);
-          console.log(tempUsers);
+          // console.log(tempUsersLength);
+          // console.log(tempUsers);
           // miro.board.widgets.create({
           //   type: 'sticker',
           //   text: tempUsers[j]["message"],
