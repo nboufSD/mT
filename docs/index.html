@@ -49,7 +49,9 @@
       if (!users){
         users = response;
       } else {
+        console.log(users);
         users = users.concat(response);
+        console.log(users);
       }
 
       // users.sort(function(a, b) {
