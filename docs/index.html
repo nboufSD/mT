@@ -89,9 +89,12 @@
       if (!maxTimestamp) {
         initUnixtime = users[0]["time"];
       }
-      const allStickers = miro.board.widgets.get({type: 'image'})
-      console.log("allStickers");
-      console.log(allStickers);
+      // const allStickers = miro.board.widgets.get({type: 'image'})
+      miro.board.widgets.get({type: 'image'}).then((array) =>{
+        console.log("allStickers");
+        console.log(array);
+      })
+
       maxTimestamp = Math.max.apply(null,users.map(x => x.time));
       const intervalTime = maxTimestamp - initUnixtime;
       console.log(maxTimestamp);
