@@ -7,7 +7,11 @@
     let allStickers;
     let boardId;
     let maxTimestamp = 0;
+    let users;
     const tempUsersLength = [];
+    let tempUsers;
+    let initUnixtime;
+    let usersIds;
 
     miro.onReady(() => {
       miro.addListener('WIDGETS_CREATED', widget => {
@@ -45,7 +49,7 @@
 
     function Example(response){
       // const users = response["userInfo"];
-      let users;
+
       if (!users){
         users = response;
       } else {
@@ -58,8 +62,6 @@
       //   return a.timeStamp - b.timeStamp;
       // });
       console.log(users);
-
-      let usersIds;
 
       usersIds = users.map(function(user) {
         return user.peerId;
@@ -86,8 +88,7 @@
 
       console.log(kindOfusers);
 
-      let tempUsers;
-      let initUnixtime;
+
       if (!maxTimestamp) {
         initUnixtime = users[0]["time"];
       }
