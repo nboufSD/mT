@@ -72,13 +72,13 @@
       let tempUsers;
       const initUnixtime = kindOfusers[0]["time"];
       const maxTimestamp = Math.max.apply(null,users.map(x => x.time));
-      const intervalTime = ( maxTimestamp - initUnixtime ) / 30;
+      const intervalTime = maxTimestamp - initUnixtime;
       console.log(maxTimestamp);
       console.log(intervalTime);
 
       let dateTime;
       let unixtime;
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < intervalTime / 30 ; i++) {
         // unixtime = initUnixtime + Math.floor(intervalTime * i);
         unixtime = initUnixtime + Math.floor(60 * i);
         dateTime = new Date(unixtime * 1000);
