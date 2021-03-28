@@ -88,10 +88,10 @@
 
       let dateTime;
       let unixtime;
-      for (let i = 0; i < intervalTime / 600 ; i++) {
+      for (let i = 0; i < intervalTime / 600000 ; i++) {
         // unixtime = initUnixtime + Math.floor(intervalTime * i);
-        unixtime = initUnixtime + Math.floor(600 * i);
-        dateTime = new Date(unixtime * 1000);
+        unixtime = initUnixtime /1000 + Math.floor(600 * i);
+        dateTime = new Date(unixtime / 1000);
         miro.board.widgets.create({
           type: 'text',
           width: 55,
