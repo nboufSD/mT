@@ -51,7 +51,9 @@
       // });
       console.log(users);
 
-      const usersIds = users.map(function(user) {
+      let usersIds;
+
+      usersIds = users.map(function(user) {
         return user.peerId;
       });
 
@@ -75,7 +77,10 @@
       }
 
       let tempUsers;
-      const initUnixtime = kindOfusers[0]["time"];
+      let initUnixtime;
+      if (!maxTimestamp) {
+        initUnixtime = kindOfusers[0]["time"];
+      }
       maxTimestamp = Math.max.apply(null,users.map(x => x.time));
       const intervalTime = maxTimestamp - initUnixtime;
       console.log(maxTimestamp);
@@ -83,24 +88,24 @@
 
       let dateTime;
       let unixtime;
-      // for (let i = 0; i < intervalTime / 600 ; i++) {
-      //   // unixtime = initUnixtime + Math.floor(intervalTime * i);
-      //   unixtime = initUnixtime + Math.floor(600 * i);
-      //   dateTime = new Date(unixtime * 1000);
-      //   miro.board.widgets.create({
-      //     type: 'text',
-      //     width: 55,
-      //     x: 210 + 50 + 60 * i,
-      //     y: (( i + 2 ) % 2) === 0 ? -150 : -100,
-      //     // style: {
-      //       // allowed values: "center", "right", "left"
-      //     //   textAlign: "right", // default: "center"
-      //     // },
-      //     text: dateTime.toLocaleTimeString().substr( 0, 5 ) + '',
-      //     // text: "a",
-      //     // x: 210 + 50 + intervalTime * i,
-      //   })
-      // }
+      for (let i = 0; i < intervalTime / 600 ; i++) {
+        // unixtime = initUnixtime + Math.floor(intervalTime * i);
+        unixtime = initUnixtime + Math.floor(600 * i);
+        dateTime = new Date(unixtime * 1000);
+        miro.board.widgets.create({
+          type: 'text',
+          width: 55,
+          x: 210 + 50 + 600 * i,
+          y: (( i + 2 ) % 2) === 0 ? -150 : -100,
+          // style: {
+            // allowed values: "center", "right", "left"
+          //   textAlign: "right", // default: "center"
+          // },
+          text: dateTime.toLocaleTimeString().substr( 0, 5 ) + '',
+          // text: "a",
+          // x: 210 + 50 + intervalTime * i,
+        })
+      }
 
       for (let i = 0; i < kindOfusers.length; i++) {
         tempUsers = users.filter(user =>
