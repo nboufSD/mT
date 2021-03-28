@@ -140,7 +140,9 @@
           })
           .catch((e) => {
                       console.log(e);  //エラーをキャッチし表示
-                      errorIndex = j;
+                      if (!errorIndex) {
+                        errorIndex = j;
+                      }
                   })
           // console.log(new Date(tempUsers[j]["time"]));
           // console.log(tempUsersLength);
