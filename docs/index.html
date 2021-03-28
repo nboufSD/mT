@@ -105,7 +105,7 @@
           miro.board.widgets.create({
             type: "image",
             url: tempUsers[j]["image"],
-            x: 210 + 50 + Number(tempUsers[j]["time"] - initUnixtime) ,
+            x: 210 + 50 + Number((tempUsers[j]["time"] - initUnixtime) / 1000) ,
             y: 0 + 150 * i,
           })
           console.log(new Date(tempUsers[j]["time"] * 1000));
