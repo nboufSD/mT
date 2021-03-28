@@ -78,7 +78,7 @@
 
       let dateTime;
       let unixtime;
-      for (let i = 0; i < intervalTime / 30 ; i++) {
+      for (let i = 0; i < intervalTime / 60 ; i++) {
         // unixtime = initUnixtime + Math.floor(intervalTime * i);
         unixtime = initUnixtime + Math.floor(60 * i);
         dateTime = new Date(unixtime * 1000);
