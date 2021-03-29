@@ -112,9 +112,7 @@
         console.log(maxTimePosition);
         console.log(i);
 
-        if (maxTimePosition !== -1) {
-          i = maxTimePosition + 1;
-        }
+
 
         if (maxTimePosition < i) {
           const idPosition = kindOfusers.findIndex(
@@ -154,6 +152,8 @@
                 console.log(maxTimePosition);
               })
             }
+          } else {
+            i = maxTimePosition + 1;
           }
         }
         creatImage();
