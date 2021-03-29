@@ -15,6 +15,7 @@
     let usersIds;
     let errorIndex;
     let existTimes;
+    let creatImage;
 
     miro.onReady(() => {
       // miro.addListener('WIDGETS_CREATED', widget => {
@@ -132,7 +133,7 @@
           (element) => element.peerId === users[i].peerId
         )
 
-        const creatImage = () => {
+        creatImage = () => {
           miro.board.widgets.create({
             type: "image",
             url: users[i]["image"],
