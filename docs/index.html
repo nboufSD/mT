@@ -16,23 +16,23 @@
     let errorIndex;
 
     miro.onReady(() => {
-      miro.addListener('WIDGETS_CREATED', widget => {
-          console.log(widget)
-        })
+      // miro.addListener('WIDGETS_CREATED', widget => {
+      //     console.log(widget)
+      //   })
       miro.initialize({
         extensionPoints: {
           bottomBar: {
             title: 'Some title',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {
-              console.log(miro.board.info.get());
+              // console.log(miro.board.info.get());
               miro.board.info.get().then((board) =>{
-                console.log('boardId', board.id);
+                // console.log('boardId', board.id);
                 boardId = board.id;
                 console.log("maxTimestamp");
                 console.log(maxTimestamp);
-                console.log("URL");
-                console.log("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId);
+                // console.log("URL");
+                // console.log("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId);
                 fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId)
                   .then((response) => {
                       return response.json();　//ここでBodyからJSONを返す
@@ -96,8 +96,8 @@
       maxTimestamp = Math.max.apply(null,users.map(x => x.time));
 
       const intervalTime = maxTimestamp - initUnixtime;
-      console.log(maxTimestamp);
-      console.log(intervalTime);
+      // console.log(maxTimestamp);
+      // console.log(intervalTime);
 
       let dateTime;
       let unixtime;
@@ -121,7 +121,9 @@
 
       for (let i = 0; i < users.length; i++) {
         if (maxTimePosition >= i) {
+          console.log("B");
           continue;
+          console.log("A");
         }
         const idPosition = kindOfusers.findIndex(
           (element) => element.peerId === users[i].peerId
