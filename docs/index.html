@@ -111,6 +111,11 @@
       function creatImage() {
         console.log(maxTimePosition);
         console.log(i);
+
+        if (maxTimePosition !== -1) {
+          i = maxTimePosition + 1;
+        }
+
         if (maxTimePosition < i) {
           const idPosition = kindOfusers.findIndex(
             (element) => element.peerId === users[i].peerId
