@@ -125,8 +125,8 @@
       let i = 0;
       function creatImage() {
         // console.log("IFIFIFIFIFIFIFIFIFIFIFIFIFIFIF");
-        // console.log(maxTimePosition);
-        // console.log(i);
+        console.log(maxTimePosition);
+        console.log(i);
         if (maxTimePosition < i) {
             // console.log("B");
 
@@ -149,7 +149,23 @@
               },
             })
             if (i < users.length) {
+              console.log("OK");
               setTimeout(creatImage,1000);
+            } else {
+                miro.board.widgets.get({type: 'image'}).then((array) =>{
+                existTimes = array.map(function(image) {
+                return image["metadata"]["3074457356456340435"]["time"];
+              });
+                console.log("allStickers");
+                console.log(existTimes);
+                max = Math.max.apply(null,existTimes);
+                console.log(maxTimestamp);
+                maxTimePosition = users.findIndex(
+                  (element) => element.time === max
+                )
+                console.log("maxTimePosition");
+                console.log(maxTimePosition);
+              })
             }
           }
           ++i;
@@ -207,20 +223,7 @@
       //     errorIndex = null;
       //   }
       // }
-      miro.board.widgets.get({type: 'image'}).then((array) =>{
-        existTimes = array.map(function(image) {
-        return image["metadata"]["3074457356456340435"]["time"];
-      });
-        console.log("allStickers");
-        console.log(existTimes);
-        max = Math.max.apply(null,existTimes);
-        console.log(maxTimestamp);
-        maxTimePosition = users.findIndex(
-          (element) => element.time === max
-        )
-        console.log("maxTimePosition");
-        console.log(maxTimePosition);
-      })
+
     }
     </script>
 </head>
