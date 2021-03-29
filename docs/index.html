@@ -121,17 +121,17 @@
       }
 
       for (let i = 0; i < users.length; i++) {
-        console.log("IFIFIFIFIFIFIFIFIFIFIFIFIFIFIF");
-        console.log(maxTimePosition);
-        console.log(i);
+        // console.log("IFIFIFIFIFIFIFIFIFIFIFIFIFIFIF");
+        // console.log(maxTimePosition);
+        // console.log(i);
         if (maxTimePosition >= i) {
-          console.log("B");
+          // console.log("B");
           continue;
         }
         const idPosition = kindOfusers.findIndex(
           (element) => element.peerId === users[i].peerId
         )
-        console.log("A");
+        // console.log("A");
         miro.board.widgets.create({
           type: "image",
           url: users[i]["image"],
@@ -144,6 +144,12 @@
             }
           },
         })
+        setTimeout(
+          function () {
+            console.log("wait")
+          },
+          1000
+        );
       }
 
       // for (let i = 0; i < kindOfusers.length; i++) {
