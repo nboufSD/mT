@@ -122,33 +122,37 @@
       }
 
       // for (let i = 0; i < users.length; i++) {
+      let i = 0;
       function creatImage() {
         // console.log("IFIFIFIFIFIFIFIFIFIFIFIFIFIFIF");
         // console.log(maxTimePosition);
         // console.log(i);
-        if (maxTimePosition >= i) {
-          // console.log("B");
-          continue;
-        }
-        const idPosition = kindOfusers.findIndex(
-          (element) => element.peerId === users[i].peerId
-        )
+        if (maxTimePosition < i) {
+            // console.log("B");
+
+          const idPosition = kindOfusers.findIndex(
+            (element) => element.peerId === users[i].peerId
+          )
 
 
-          console.log("WAIT");
-          miro.board.widgets.create({
-            type: "image",
-            url: users[i]["image"],
-            x: 210 + 50 + Number((users[i]["time"] - initUnixtime) / 1000) * 30 ,
-            y: 0 + 350 * idPosition,
-            scale: 0.2,
-            metadata: {
-              "3074457356456340435": {
-                "time": users[i]["time"]
-              }
-            },
-          })
-          setTimeout(creatImage,1000);
+            console.log("WAIT");
+            miro.board.widgets.create({
+              type: "image",
+              url: users[i]["image"],
+              x: 210 + 50 + Number((users[i]["time"] - initUnixtime) / 1000) * 30 ,
+              y: 0 + 350 * idPosition,
+              scale: 0.2,
+              metadata: {
+                "3074457356456340435": {
+                  "time": users[i]["time"]
+                }
+              },
+            })
+            if (i < users.length) {
+              setTimeout(creatImage,1000);
+            }
+          }
+          ++i;
         }
         creatImage();
 
