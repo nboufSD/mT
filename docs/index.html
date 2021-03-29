@@ -148,9 +148,10 @@
                 }
               },
             })
+            ++i;
             if (i < users.length) {
               console.log("OK");
-              setTimeout(creatImage,1000);
+              setTimeout(creatImage,100);
             } else {
                 miro.board.widgets.get({type: 'image'}).then((array) =>{
                 existTimes = array.map(function(image) {
@@ -168,7 +169,6 @@
               })
             }
           }
-          ++i;
         }
         creatImage();
 
