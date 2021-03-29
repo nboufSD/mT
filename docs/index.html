@@ -118,54 +118,75 @@
         })
       }
 
-      for (let i = 0; i < kindOfusers.length; i++) {
-        tempUsers = users.filter(user =>
-          user.peerId === kindOfusers[i].peerId
-        );
-        for (let j = 0; j < tempUsers.length; j++) {
-          if (tempUsersLength[i] > j) {
-            continue;
-          }
-          miro.board.widgets.create({
-            type: "image",
-            url: tempUsers[j]["image"],
-            x: 210 + 50 + Number((tempUsers[j]["time"] - initUnixtime) / 1000) * 30 ,
-            y: 0 + 350 * i,
-            scale: 0.2,
-            metadata: {
-              "3074457356456340435": {
-                "time": tempUsers[j]["time"]
-              }
-            },
-          })
-          .catch((e) => {
-                      console.log(e);  //エラーをキャッチし表示
-                      if (!errorIndex) {
-                        errorIndex = j;
-                      }
-                  })
-          // console.log(new Date(tempUsers[j]["time"]));
-          // console.log(tempUsersLength);
-          // console.log(tempUsers);
-          // miro.board.widgets.create({
-          //   type: 'sticker',
-          //   text: tempUsers[j]["message"],
-          //   x: 210 + 50 + Number(tempUsers[j]["time"] - initUnixtime),
-          //   y: 70 + 150 * i,
-          //   scale: 0.2,
-          //   style: {
-          //     stickerBackgroundColor: tempUsers[j]["messageColor"],
-          //   }
-          // })
+      for (let i = 0; i < users.length; i++) {
+        if (maxTimePosition >= i) {
+          continue;
         }
-        tempUsersLength[i] = errorIndex ?  errorIndex : tempUsers.length;
-        console.log(tempUsersLength[i]);
-        console.log(errorIndex);
-        console.log(tempUsers.length);
-        if (errorIndex) {
-          errorIndex = null;
-        }
+        const idPosition = kindOfusers.findIndex(
+          (element) => element.peerId === users[i].peerId
+        )
+        miro.board.widgets.create({
+          type: "image",
+          url: users[i]["image"],
+          x: 210 + 50 + Number((users[i]["time"] - initUnixtime) / 1000) * 30 ,
+          y: 0 + 350 * idPosition,
+          scale: 0.2,
+          metadata: {
+            "3074457356456340435": {
+              "time": users[i]["time"]
+            }
+          },
+        })
       }
+
+      // for (let i = 0; i < kindOfusers.length; i++) {
+      //   tempUsers = users.filter(user =>
+      //     user.peerId === kindOfusers[i].peerId
+      //   );
+      //   for (let j = 0; j < tempUsers.length; j++) {
+      //     if (tempUsersLength[i] > j) {
+      //       continue;
+      //     }
+      //     miro.board.widgets.create({
+      //       type: "image",
+      //       url: tempUsers[j]["image"],
+      //       x: 210 + 50 + Number((tempUsers[j]["time"] - initUnixtime) / 1000) * 30 ,
+      //       y: 0 + 350 * i,
+      //       scale: 0.2,
+      //       metadata: {
+      //         "3074457356456340435": {
+      //           "time": tempUsers[j]["time"]
+      //         }
+      //       },
+      //     })
+      //     .catch((e) => {
+      //                 console.log(e);  //エラーをキャッチし表示
+      //                 if (!errorIndex) {
+      //                   errorIndex = j;
+      //                 }
+      //             })
+      //     // console.log(new Date(tempUsers[j]["time"]));
+      //     // console.log(tempUsersLength);
+      //     // console.log(tempUsers);
+      //     // miro.board.widgets.create({
+      //     //   type: 'sticker',
+      //     //   text: tempUsers[j]["message"],
+      //     //   x: 210 + 50 + Number(tempUsers[j]["time"] - initUnixtime),
+      //     //   y: 70 + 150 * i,
+      //     //   scale: 0.2,
+      //     //   style: {
+      //     //     stickerBackgroundColor: tempUsers[j]["messageColor"],
+      //     //   }
+      //     // })
+      //   }
+      //   tempUsersLength[i] = errorIndex ?  errorIndex : tempUsers.length;
+      //   console.log(tempUsersLength[i]);
+      //   console.log(errorIndex);
+      //   console.log(tempUsers.length);
+      //   if (errorIndex) {
+      //     errorIndex = null;
+      //   }
+      // }
       miro.board.widgets.get({type: 'image'}).then((array) =>{
         const existTimes = array.map(function(image) {
         return image["metadata"]["3074457356456340435"]["time"];
@@ -174,6 +195,11 @@
         console.log(existTimes);
         maxTimestamp = Math.max.apply(null,existTimes);
         console.log(maxTimestamp);
+        const maxTimePosition = users.findIndex(
+          (element) => element.time === maxTimestamp
+        )
+        console.log("maxTimePosition");
+        console.log(maxTimePosition);
       })
     }
     </script>
