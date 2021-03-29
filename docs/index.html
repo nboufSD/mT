@@ -14,6 +14,7 @@
     let initUnixtime;
     let usersIds;
     let errorIndex;
+    let existTimes;
 
     miro.onReady(() => {
       // miro.addListener('WIDGETS_CREATED', widget => {
@@ -120,17 +121,17 @@
       }
 
       for (let i = 0; i < users.length; i++) {
-        console.log("IF");
+        console.log("IFIFIFIFIFIFIFIFIFIFIFIFIFIFIF");
         console.log(maxTimePosition);
         console.log(i);
         if (maxTimePosition >= i) {
           console.log("B");
           continue;
-          console.log("A");
         }
         const idPosition = kindOfusers.findIndex(
           (element) => element.peerId === users[i].peerId
         )
+        console.log("A");
         miro.board.widgets.create({
           type: "image",
           url: users[i]["image"],
@@ -194,15 +195,15 @@
       //   }
       // }
       miro.board.widgets.get({type: 'image'}).then((array) =>{
-        const existTimes = array.map(function(image) {
+        existTimes = array.map(function(image) {
         return image["metadata"]["3074457356456340435"]["time"];
       });
         console.log("allStickers");
         console.log(existTimes);
-        maxTimestamp = Math.max.apply(null,existTimes);
+        max = Math.max.apply(null,existTimes);
         console.log(maxTimestamp);
         maxTimePosition = users.findIndex(
-          (element) => element.time === maxTimestamp
+          (element) => element.time === max
         )
         console.log("maxTimePosition");
         console.log(maxTimePosition);
