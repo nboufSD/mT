@@ -110,24 +110,17 @@
       let i = 0;
       let existImages = [];
       function creatImage() {
-        console.log(maxTimePosition);
+        miro.board.widgets.get({type: 'image'}).then((array) =>{
+            existImages = array.map(function(image) {
+            return image["metadata"]["3074457356456340435"]["time"];
+          });
+        })
+        i = existImages.length;
         console.log(i);
 
-        if (maxTimePosition < i) {
-
-          if (maxTimePosition === -1){
-            miro.board.widgets.get({type: 'image'}).then((array) =>{
-                existImages = array.map(function(image) {
-                return image["metadata"]["3074457356456340435"]["time"];
-              });
-            })
-            i = existImages.length;
-          }
-
-          const idPosition = kindOfusers.findIndex(
+        const idPosition = kindOfusers.findIndex(
             (element) => element.peerId === users[i].peerId
           )
-
           console.log("WAIT");
           miro.board.widgets.create({
             type: "image",
@@ -142,28 +135,71 @@
             },
           })
           ++i;
-          if (i < users.length) {
-            console.log("OK");
-            setTimeout(creatImage,100);
-          } else {
-              miro.board.widgets.get({type: 'image'}).then((array) =>{
-                existTimes = array.map(function(image) {
-                return image["metadata"]["3074457356456340435"]["time"];
-              });
-                console.log("allStickers");
-                console.log(existTimes);
-                max = Math.max.apply(null,existTimes);
-                console.log(maxTimestamp);
-                maxTimePosition = users.findIndex(
-                  (element) => element.time === max
-                )
-                console.log("maxTimePosition");
-                console.log(maxTimePosition);
-              })
-            }
-          } else {
-            i = maxTimePosition + 1;
-          }
+
+        if (i < users.length) {
+          setTimeout(creatImage,100);
+        } else {
+          miro.board.widgets.get({type: 'image'}).then((array) =>{
+            existImages = array.map(function(image) {
+              return image["metadata"]["3074457356456340435"]["time"];
+            });
+          })
+          maxTimestamp = Math.max.apply(null,existTimes);
+        }
+
+
+
+        // if (maxTimePosition < i) {
+        //   // if (maxTimePosition === -1){
+        //     miro.board.widgets.get({type: 'image'}).then((array) =>{
+        //         existImages = array.map(function(image) {
+        //         return image["metadata"]["3074457356456340435"]["time"];
+        //       });
+        //     })
+        //     i = existImages.length;
+        //   // }
+
+        //   const idPosition = kindOfusers.findIndex(
+        //     (element) => element.peerId === users[i].peerId
+        //   )
+
+        //   console.log("WAIT");
+        //   miro.board.widgets.create({
+        //     type: "image",
+        //     url: users[i]["image"],
+        //     x: 210 + 50 + Number((users[i]["time"] - initUnixtime) / 1000) * 30 ,
+        //     y: 0 + 350 * idPosition,
+        //     scale: 0.2,
+        //     metadata: {
+        //       "3074457356456340435": {
+        //         "time": users[i]["time"]
+        //       }
+        //     },
+        //   })
+        //   ++i;
+        //   if (i < users.length) {
+        //     console.log("OK");
+        //     setTimeout(creatImage,100);
+        //   }
+        //   // else {
+        //     //   miro.board.widgets.get({type: 'image'}).then((array) =>{
+        //     //     existTimes = array.map(function(image) {
+        //     //     return image["metadata"]["3074457356456340435"]["time"];
+        //     //   });
+        //     //     console.log("allStickers");
+        //     //     console.log(existTimes);
+        //     //     max = Math.max.apply(null,existTimes);
+        //     //     console.log(maxTimestamp);
+        //     //     maxTimePosition = users.findIndex(
+        //     //       (element) => element.time === max
+        //     //     )
+        //     //     console.log("maxTimePosition");
+        //     //     console.log(maxTimePosition);
+        //     //   })
+        //     // }
+        //   } else {
+        //     i = maxTimePosition + 1;
+        //   }
         }
         creatImage();
 
