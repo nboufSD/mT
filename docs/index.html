@@ -72,7 +72,7 @@
 
       // usersIdsに更新分のuserのpeerIdから作られた新しい配列と既存のusersIdsの比較更新分をcancatしてひっつける
       miro.board.widgets.get({type: 'text'}).then((array) =>{
-        existUsersIds = array.map(function(text) {
+        const existUsersIds = array.map(function(text) {
           console.log(text);
           if (!text.hasOwnProperty(["metadata"]["3074457356456340435"])) {
             return;
