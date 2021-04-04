@@ -105,8 +105,11 @@
         const kindOfusers = users.filter(function(user, index) {
           return usersIds.indexOf(user.peerId) === index;
         });
+        console.log(kindOfusers);
 
         for (let i = 0; i < kindOfusers.length; i++) {
+          console.log(existUsersIds.length);
+          console.log(i);
           if (existUsersIds.length > i) {
             console.log("existUsersIds = OK");
             continue;
