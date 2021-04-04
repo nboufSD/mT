@@ -104,6 +104,7 @@
         console.log(existUsersIds);
 
         // 貼られていない（更新分）のidデータと貼られているtextの重複なしidデータを結合し、その結合したリストの重複排除を行う
+        // 順序が怪しくなる時がある気がする…
         const totalIds = Array.from(new Set(existUsersIds.concat(usersIds)));
         console.log(totalIds);
 
@@ -137,7 +138,7 @@
         if (!initUnixtime) {
           if (existImages.length !== 0) {
             // すでにイメージが貼られていたらそのイメージ郡の最小のtimeを初期時間とする
-            initUnixtime = existImages[0];
+            initUnixtime = Math.min.apply(null,existImages);;
             console.log("initUnixtime");
             console.log(initUnixtime);
           } else {
