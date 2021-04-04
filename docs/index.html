@@ -65,6 +65,9 @@
 
     function Example(response){
       users = response;
+      if (users.length === 0) {
+        return;
+      }
       console.log(users);
 
       // usersIdsに更新分のuserのpeerIdから作られた新しい配列と既存のusersIdsの比較更新分をcancatしてひっつける
