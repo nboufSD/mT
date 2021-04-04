@@ -74,6 +74,9 @@
       miro.board.widgets.get({type: 'text'}).then((array) =>{
         existUsersIds = array.map(function(text) {
           console.log(text);
+          if (!text.hasOwnProperty(["metadata"]["3074457356456340435"])) {
+            return;
+          }
           if (!text.hasOwnProperty(["metadata"]["3074457356456340435"]["id"])) {
             return;
           }
