@@ -33,21 +33,21 @@
                     return image["metadata"]["3074457356456340435"]["time"];
                   });
                   maxTimestamp = Math.max.apply(null,existImages);
+                  console.log("existImages");
+                  console.log(existImages);
+                  console.log("maxTimestamp");
+                  console.log(maxTimestamp);
+                  fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId)
+                    .then((response) => {
+                        return response.json();　//ここでBodyからJSONを返す
+                    })
+                    .then((result) => {
+                        Example(result);  //取得したJSONデータを関数に渡す
+                    })
+                    .catch((e) => {
+                        console.log(e);  //エラーをキャッチし表示
+                    })
                 })
-                console.log("existImages");
-                console.log(existImages);
-                console.log("maxTimestamp");
-                console.log(maxTimestamp);
-                fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId)
-                  .then((response) => {
-                      return response.json();　//ここでBodyからJSONを返す
-                  })
-                  .then((result) => {
-                      Example(result);  //取得したJSONデータを関数に渡す
-                  })
-                  .catch((e) => {
-                      console.log(e);  //エラーをキャッチし表示
-                  })
               })
             }
           }
