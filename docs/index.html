@@ -76,9 +76,11 @@
         existUsersIds = array.map(function(text) {
           console.log(text);
           if (!text.hasOwnProperty(["metadata"]["3074457356456340435"])) {
+            console.log("1");
             return;
           }
           if (!text.hasOwnProperty(["metadata"]["3074457356456340435"]["id"])) {
+            console.log("2");
             return;
           }
           console.log(text["metadata"]["3074457356456340435"]["id"]);
