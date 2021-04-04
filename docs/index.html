@@ -71,12 +71,23 @@
       console.log(users);
 
       // usersIdsに更新分のuserのpeerIdから作られた新しい配列と既存のusersIdsの比較更新分をcancatしてひっつける
-      usersIds = usersIds.concat(
+      miro.board.widgets.get({type: 'text'}).then((array) =>{
+        existUsersIds = array.map(function(text) {
+          if (!text["metadata"]["3074457356456340435"]["id"]) {
+            return;
+          }
+          return text["metadata"]["3074457356456340435"]["id"];
+        });
+      })
+
+      console.log(existUsersIds);
+
+      usersIds = existUsersIds.concat(
         users.map(function(user) {
           return user.peerId;
-        }).filter(i => usersIds.indexOf(i) === -1)
+        }).filter(i => existUsersIds.indexOf(i) === -1)
       );
-      console.log(usersIds)
+      console.log(usersIds);
 
       const kindOfusers = users.filter(function(user, index) {
         return usersIds.indexOf(user.peerId) === index;
@@ -88,6 +99,12 @@
           text: kindOfusers[i]["nickname"],
           x: 0,
           y: 0 + 350 * i,
+          metadata: {
+              "3074457356456340435": {
+                "kind": "id",
+                "id": kindOfusers[i]["peerId"]
+              }
+            },
         })
         // miro.board.widgets.create({
         //   type: "image",
@@ -121,6 +138,11 @@
           //   textAlign: "right", // default: "center"
           // },
           text: dateTime.toLocaleTimeString() + '',
+          metadata: {
+              "3074457356456340435": {
+                "kind": "timeScale"
+              }
+            },
         })
       }
       let i = 0;
@@ -128,11 +150,11 @@
         if (users.length <= i) {
           return;
         }
-        miro.board.widgets.get({type: 'image'}).then((array) =>{
-            existImages = array.map(function(image) {
-            return image["metadata"]["3074457356456340435"]["time"];
-          });
-        })
+        // miro.board.widgets.get({type: 'image'}).then((array) =>{
+        //     existImages = array.map(function(image) {
+        //     return image["metadata"]["3074457356456340435"]["time"];
+        //   });
+        // })
         const idPosition = kindOfusers.findIndex(
             (element) => element.peerId === users[i].peerId
           )
