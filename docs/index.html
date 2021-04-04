@@ -10,6 +10,7 @@
     let maxTimePosition = -1;
     let users;
     const tempUsersLength = [];
+    let existImages = [];
     let tempUsers;
     let initUnixtime;
     let usersIds = [];
@@ -29,9 +30,11 @@
               miro.board.info.get().then((board) =>{
                 boardId = board.id;
                 miro.board.widgets.get({type: 'image'}).then((array) =>{
-                  existImages = array.map(function(image) {
-                    return image["metadata"]["3074457356456340435"]["time"];
-                  });
+                  if (array.length !== 0) {
+                    existImages = array.map(function(image) {
+                      return image["metadata"]["3074457356456340435"]["time"];
+                    });
+                  }
                   if (existImages.length !== 0) {
                     maxTimestamp = Math.max.apply(null,existImages);
                   } else {
