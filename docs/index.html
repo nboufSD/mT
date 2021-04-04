@@ -89,19 +89,22 @@
             return;
           }
           console.log(text["metadata"]["3074457356456340435"]["id"]);
-          return text;
+          return text["metadata"]["3074457356456340435"]["id"];
         });
         console.log(existUsersIds);
         existUsersIds = existUsersIds.filter(Boolean);
         console.log(existUsersIds);
 
-        const uniqueItemUseES2015 = users.filter((item, index, array) => {
-          return array.findIndex(item2 => item.peerId === item2.peerId) === index;
+        const itemIds = users.map(function(item) {
+          return item.peerId;
         });
-        console.log(uniqueItemUseES2015)
+        usersIds = itemIds.filter(function(user, index) {
+          return itemIds.indexOf(user) === index;
+        });
+        console.log(usersIds)
 
         usersIds = existUsersIds.concat(
-          uniqueItemUseES2015
+          usersIds
         );
 
         // usersIds = existUsersIds.concat(
