@@ -84,75 +84,82 @@
             console.log("2");
             return;
           }
+          if (!text["metadata"]["3074457356456340435"].hasOwnProperty("id")) {
+            console.log("3");
+            return;
+          }
           console.log(text["metadata"]["3074457356456340435"]["id"]);
           return text["metadata"]["3074457356456340435"]["id"];
         });
+        console.log(existUsersIds);
+
+        usersIds = existUsersIds.concat(
+          users.map(function(user) {
+            return user.peerId;
+          }).filter(i => existUsersIds.indexOf(i) === -1)
+        );
+        console.log(usersIds);
+
+        const kindOfusers = users.filter(function(user, index) {
+          return usersIds.indexOf(user.peerId) === index;
+        });
+
+        for (let i = 0; i < kindOfusers.length; i++) {
+          if (existUsersIds.length > i) {
+            console.log("existUsersIds = OK");
+            continue;
+          }
+          miro.board.widgets.create({
+            type: 'text',
+            text: kindOfusers[i]["nickname"],
+            x: 0,
+            y: 0 + 350 * i,
+            metadata: {
+                "3074457356456340435": {
+                  "id": kindOfusers[i]["peerId"]
+                }
+              },
+          })
+          // miro.board.widgets.create({
+          //   type: "image",
+          //   url: kindOfusers[i]["userPhoto"],
+          //   x: 100,
+          //   y: 0 + 350 * i
+          // })
+        }
+
+        if (!initUnixtime) {
+          initUnixtime = existImages[0];
+        }
+
+        maxTimestamp = Math.max.apply(null,users.map(x => x.time));
+
+        const intervalTime = maxTimestamp - initUnixtime;
+
+        let dateTime;
+        let unixtime;
+        for (let i = 0; i < intervalTime / 600000 ; i++) {
+          unixtime = initUnixtime + Math.floor(600000 * i);
+          dateTime = new Date(unixtime);
+          miro.board.widgets.create({
+            type: 'text',
+            width: 55,
+            x: 210 + 50 + 600 * i * 30,
+            y: -100,
+            // y: (( i + 2 ) % 2) === 0 ? -150 : -100,
+            // style: {
+              // allowed values: "center", "right", "left"
+            //   textAlign: "right", // default: "center"
+            // },
+            text: dateTime.toLocaleTimeString() + '',
+            metadata: {
+                "3074457356456340435": {
+                  "kind": "timeScale"
+                }
+              },
+          })
+        }
       })
-
-      console.log(existUsersIds);
-
-      usersIds = existUsersIds.concat(
-        users.map(function(user) {
-          return user.peerId;
-        }).filter(i => existUsersIds.indexOf(i) === -1)
-      );
-      console.log(usersIds);
-
-      const kindOfusers = users.filter(function(user, index) {
-        return usersIds.indexOf(user.peerId) === index;
-      });
-
-      for (let i = 0; i < kindOfusers.length; i++) {
-        miro.board.widgets.create({
-          type: 'text',
-          text: kindOfusers[i]["nickname"],
-          x: 0,
-          y: 0 + 350 * i,
-          metadata: {
-              "3074457356456340435": {
-                "id": kindOfusers[i]["peerId"]
-              }
-            },
-        })
-        // miro.board.widgets.create({
-        //   type: "image",
-        //   url: kindOfusers[i]["userPhoto"],
-        //   x: 100,
-        //   y: 0 + 350 * i
-        // })
-      }
-
-      if (!initUnixtime) {
-        initUnixtime = existImages[0];
-      }
-
-      maxTimestamp = Math.max.apply(null,users.map(x => x.time));
-
-      const intervalTime = maxTimestamp - initUnixtime;
-
-      let dateTime;
-      let unixtime;
-      for (let i = 0; i < intervalTime / 600000 ; i++) {
-        unixtime = initUnixtime + Math.floor(600000 * i);
-        dateTime = new Date(unixtime);
-        miro.board.widgets.create({
-          type: 'text',
-          width: 55,
-          x: 210 + 50 + 600 * i * 30,
-          y: -100,
-          // y: (( i + 2 ) % 2) === 0 ? -150 : -100,
-          // style: {
-            // allowed values: "center", "right", "left"
-          //   textAlign: "right", // default: "center"
-          // },
-          text: dateTime.toLocaleTimeString() + '',
-          metadata: {
-              "3074457356456340435": {
-                "kind": "timeScale"
-              }
-            },
-        })
-      }
       let i = 0;
       function creatImage() {
         if (users.length <= i) {
