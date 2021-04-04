@@ -92,6 +92,8 @@
           return text["metadata"]["3074457356456340435"]["id"];
         });
         console.log(existUsersIds);
+        existUsersIds = existUsersIds.filter(Boolean);
+        console.log(existUsersIds);
 
         usersIds = existUsersIds.concat(
           users.map(function(user) {
@@ -159,39 +161,39 @@
               },
           })
         }
-      })
-      let i = 0;
-      function creatImage() {
-        if (users.length <= i) {
-          return;
-        }
-        // miro.board.widgets.get({type: 'image'}).then((array) =>{
-        //     existImages = array.map(function(image) {
-        //     return image["metadata"]["3074457356456340435"]["time"];
-        //   });
-        // })
-        const idPosition = kindOfusers.findIndex(
-            (element) => element.peerId === users[i].peerId
-          )
-        console.log(idPosition);
-          miro.board.widgets.create({
-            type: "image",
-            url: users[i]["image"],
-            x: 210 + 50 + Number((users[i]["time"] - initUnixtime) / 1000) * 30 ,
-            y: 0 + 350 * idPosition,
-            scale: 0.2,
-            metadata: {
-              "3074457356456340435": {
-                "time": users[i]["time"]
+        let i = 0;
+        function creatImage() {
+          if (users.length <= i) {
+            return;
+          }
+          // miro.board.widgets.get({type: 'image'}).then((array) =>{
+          //     existImages = array.map(function(image) {
+          //     return image["metadata"]["3074457356456340435"]["time"];
+          //   });
+          // })
+          const idPosition = kindOfusers.findIndex(
+              (element) => element.peerId === users[i].peerId
+            )
+          console.log(idPosition);
+            miro.board.widgets.create({
+              type: "image",
+              url: users[i]["image"],
+              x: 210 + 50 + Number((users[i]["time"] - initUnixtime) / 1000) * 30 ,
+              y: 0 + 350 * idPosition,
+              scale: 0.2,
+              metadata: {
+                "3074457356456340435": {
+                  "time": users[i]["time"]
+                }
+              },
+            }).then(() => {
+                ++i;
+                setTimeout(creatImage,100);
               }
-            },
-          }).then(() => {
-              ++i;
-              setTimeout(creatImage,100);
-            }
-          )
-      }
-      creatImage();
+            )
+        }
+        creatImage();
+      })
     }
 
 
