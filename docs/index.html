@@ -89,28 +89,41 @@
             return;
           }
           console.log(text["metadata"]["3074457356456340435"]["id"]);
-          return text["metadata"]["3074457356456340435"]["id"];
+          return text;
         });
         console.log(existUsersIds);
         existUsersIds = existUsersIds.filter(Boolean);
         console.log(existUsersIds);
 
+        const uniqueItemUseES2015 = users.filter((item, index, array) => {
+          return array.findIndex(item2 => item.peerId === item2.peerId) === index;
+        });
+        console.log(uniqueItemUseES2015)
+
         usersIds = existUsersIds.concat(
-          users.map(function(user) {
-            return user.peerId;
-          }).filter(i => existUsersIds.indexOf(i) === -1)
+          uniqueItemUseES2015
         );
+
+        // usersIds = existUsersIds.concat(
+        //   users.map(function(user) {
+        //     return user.peerId;
+        //   }).filter(i => existUsersIds.indexOf(i) === -1)
+        // );
         console.log(usersIds);
 
-        const kindOfusers = users.filter(function(user, index) {
-          console.log(user.peerId);
-          console.log(usersIds.indexOf(user.peerId));
-          console.log(index);
-          return usersIds.indexOf(user.peerId) === index;
-        });
-        console.log(kindOfusers);
+        // const itemIds = array.map(function(item) {
+        //   return item.id;
+        // });
+        // const kindOfusers = users.filter(function(user, index) {
+        //   return usersIds.indexOf(user.peerId) === index;
+        // });
 
-        for (let i = 0; i < kindOfusers.length; i++) {
+        // const uniqueItemUseES2015 = users.filter((item, index, array) => {
+        //   return array.findIndex(item2 => item.peerId === item2.Id) === index;
+        // });
+        // console.log(uniqueItemUseES2015);
+
+        for (let i = 0; i < usersIds.length; i++) {
           console.log(existUsersIds.length);
           console.log(i);
           if (existUsersIds.length > i) {
@@ -119,12 +132,12 @@
           }
           miro.board.widgets.create({
             type: 'text',
-            text: kindOfusers[i]["nickname"],
+            text: usersIds[i]["nickname"],
             x: 0,
             y: 0 + 350 * i,
             metadata: {
                 "3074457356456340435": {
-                  "id": kindOfusers[i]["peerId"]
+                  "id": usersIds[i]["peerId"]
                 }
               },
           })
