@@ -96,10 +96,23 @@
             return;
           }
           console.log(text["metadata"]["3074457356456340435"]["id"]);
-          return text["metadata"]["3074457356456340435"]["id"];
+          return text["metadata"]["3074457356456340435"];
+        });
+        existUsersIds = existUsersIds.filter(Boolean);
+        console.log(existUsersIds);
+        existUsersIds.sort(function(a, b) {
+          if (a.order < b.order) {
+            console.log(a);
+            return -1;
+          } else {
+            console.log(b);
+            return 1;
+          }
         });
         console.log(existUsersIds);
-        existUsersIds = existUsersIds.filter(Boolean);
+        existUsersIds = map(function(text) {
+            return text.id;
+          })
         // 貼られているtextの重複なしidデータ
         console.log(existUsersIds);
 
@@ -123,7 +136,8 @@
             y: 0 + 350 * i,
             metadata: {
                 "3074457356456340435": {
-                  "id": totalIds[i]
+                  "id": totalIds[i],
+                  "order": i
                 }
               },
           })
@@ -134,7 +148,6 @@
           //   y: 0 + 350 * i
           // })
         }
-
         if (!initUnixtime) {
           if (existImages.length !== 0) {
             // すでにイメージが貼られていたらそのイメージ郡の最小のtimeを初期時間とする
