@@ -28,6 +28,14 @@
             onClick: () => {
               miro.board.info.get().then((board) =>{
                 boardId = board.id;
+                miro.board.widgets.get({type: 'image'}).then((array) =>{
+                  existImages = array.map(function(image) {
+                    return image["metadata"]["3074457356456340435"]["time"];
+                  });
+                  maxTimestamp = Math.max.apply(null,existImages);
+                })
+                console.log("existImages");
+                console.log(existImages);
                 console.log("maxTimestamp");
                 console.log(maxTimestamp);
                 fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId)
@@ -108,14 +116,6 @@
       let i = 0;
       function creatImage() {
         if (users.length <= i) {
-          miro.board.widgets.get({type: 'image'}).then((array) =>{
-            existImages = array.map(function(image) {
-              return image["metadata"]["3074457356456340435"]["time"];
-            });
-          })
-          maxTimestamp = Math.max.apply(null,existImages);
-          console.log(maxTimestamp);
-          console.log(existImages);
           return;
         }
         miro.board.widgets.get({type: 'image'}).then((array) =>{
@@ -138,9 +138,11 @@
                 "time": users[i]["time"]
               }
             },
-          })
-          ++i;
-        setTimeout(creatImage,100);
+          }).then(() => {
+              ++i;
+              setTimeout(creatImage,100);
+            }
+          )
       }
       creatImage();
     }
