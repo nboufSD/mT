@@ -98,7 +98,7 @@
       }
 
       if (!initUnixtime) {
-        initUnixtime = users[0]["time"];
+        initUnixtime = existImages[0];
       }
 
       maxTimestamp = Math.max.apply(null,users.map(x => x.time));
