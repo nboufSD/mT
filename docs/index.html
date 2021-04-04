@@ -32,7 +32,11 @@
                   existImages = array.map(function(image) {
                     return image["metadata"]["3074457356456340435"]["time"];
                   });
-                  maxTimestamp = Math.max.apply(null,existImages);
+                  if (existImages.length !== 0) {
+                    maxTimestamp = Math.max.apply(null,existImages);
+                  } else {
+                    maxTimestamp = 0;
+                  }
                   console.log("existImages");
                   console.log(existImages);
                   console.log("maxTimestamp");
