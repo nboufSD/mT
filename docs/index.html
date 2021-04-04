@@ -115,6 +115,7 @@
           })
           maxTimestamp = Math.max.apply(null,existImages);
           console.log(maxTimestamp);
+          console.log(existImages);
           return;
         }
         miro.board.widgets.get({type: 'image'}).then((array) =>{
