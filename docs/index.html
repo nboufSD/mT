@@ -103,7 +103,10 @@
         console.log(usersIds);
 
         const kindOfusers = users.filter(function(user, index) {
-          return usersIds.indexOf(user) === index;
+          console.log(user.peerId);
+          console.log(usersIds.indexOf(user.peerId));
+          console.log(index);
+          return usersIds.indexOf(user.peerId) === index;
         });
         console.log(kindOfusers);
 
