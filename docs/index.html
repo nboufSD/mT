@@ -65,17 +65,24 @@
 
     function Example(response){
       users = response;
+      // 更新分がなければreturn
       if (users.length === 0) {
         return;
       }
-      console.log(users);
 
-      // usersIdsに更新分のuserのpeerIdから作られた新しい配列と既存のusersIdsの比較更新分をcancatしてひっつける
+      const itemIds = users.map(function(item) {
+        return item.peerId;
+      });
+      usersIds = itemIds.filter(function(user, index) {
+        return itemIds.indexOf(user) === index;
+      });
+      // 貼られていない（更新分）のidデータ
+      console.log(usersIds)
+
       let existUsersIds = [];
       miro.board.widgets.get({type: 'text'}).then((array) =>{
         existUsersIds = array.map(function(text) {
           console.log(text);
-          console.log("id" in text);
           if (!text.hasOwnProperty("metadata")) {
             console.log("1");
             return;
@@ -93,40 +100,14 @@
         });
         console.log(existUsersIds);
         existUsersIds = existUsersIds.filter(Boolean);
+        // 貼られているtextの重複なしidデータ
         console.log(existUsersIds);
 
-        const itemIds = users.map(function(item) {
-          return item.peerId;
-        });
-        usersIds = itemIds.filter(function(user, index) {
-          return itemIds.indexOf(user) === index;
-        });
-        console.log(usersIds)
+        // 貼られていない（更新分）のidデータと貼られているtextの重複なしidデータを結合し、その結合したリストの重複排除を行う
+        const totalIds = Array.from(new Set(existUsersIds.concat(usersIds)));
+        console.log(totalIds);
 
-        usersIds = existUsersIds.concat(
-          usersIds
-        );
-
-        // usersIds = existUsersIds.concat(
-        //   users.map(function(user) {
-        //     return user.peerId;
-        //   }).filter(i => existUsersIds.indexOf(i) === -1)
-        // );
-        console.log(usersIds);
-
-        // const itemIds = array.map(function(item) {
-        //   return item.id;
-        // });
-        // const kindOfusers = users.filter(function(user, index) {
-        //   return usersIds.indexOf(user.peerId) === index;
-        // });
-
-        // const uniqueItemUseES2015 = users.filter((item, index, array) => {
-        //   return array.findIndex(item2 => item.peerId === item2.Id) === index;
-        // });
-        // console.log(uniqueItemUseES2015);
-
-        for (let i = 0; i < usersIds.length; i++) {
+        for (let i = 0; i < totalIds.length; i++) {
           console.log(existUsersIds.length);
           console.log(i);
           if (existUsersIds.length > i) {
@@ -135,12 +116,13 @@
           }
           miro.board.widgets.create({
             type: 'text',
-            text: usersIds[i]["nickname"],
+            // text: usersIds[i]["nickname"],
+            text: totalIds[i],
             x: 0,
             y: 0 + 350 * i,
             metadata: {
                 "3074457356456340435": {
-                  "id": usersIds[i]["peerId"]
+                  "id": totalIds[i]
                 }
               },
           })
@@ -151,72 +133,162 @@
           //   y: 0 + 350 * i
           // })
         }
-
-        if (!initUnixtime) {
-          initUnixtime = existImages[0];
-        }
-
-        maxTimestamp = Math.max.apply(null,users.map(x => x.time));
-
-        const intervalTime = maxTimestamp - initUnixtime;
-
-        let dateTime;
-        let unixtime;
-        for (let i = 0; i < intervalTime / 600000 ; i++) {
-          unixtime = initUnixtime + Math.floor(600000 * i);
-          dateTime = new Date(unixtime);
-          miro.board.widgets.create({
-            type: 'text',
-            width: 55,
-            x: 210 + 50 + 600 * i * 30,
-            y: -100,
-            // y: (( i + 2 ) % 2) === 0 ? -150 : -100,
-            // style: {
-              // allowed values: "center", "right", "left"
-            //   textAlign: "right", // default: "center"
-            // },
-            text: dateTime.toLocaleTimeString() + '',
-            metadata: {
-                "3074457356456340435": {
-                  "kind": "timeScale"
-                }
-              },
-          })
-        }
-        let i = 0;
-        function creatImage() {
-          if (users.length <= i) {
-            return;
-          }
-          // miro.board.widgets.get({type: 'image'}).then((array) =>{
-          //     existImages = array.map(function(image) {
-          //     return image["metadata"]["3074457356456340435"]["time"];
-          //   });
-          // })
-          const idPosition = usersIds.findIndex(
-              (element) => element.peerId === users[i].peerId
-            )
-          console.log(idPosition);
-            miro.board.widgets.create({
-              type: "image",
-              url: users[i]["image"],
-              x: 210 + 50 + Number((users[i]["time"] - initUnixtime) / 1000) * 30 ,
-              y: 0 + 350 * idPosition,
-              scale: 0.2,
-              metadata: {
-                "3074457356456340435": {
-                  "time": users[i]["time"]
-                }
-              },
-            }).then(() => {
-                ++i;
-                setTimeout(creatImage,100);
-              }
-            )
-        }
-        creatImage();
       })
     }
+    //   users = response;
+    //   if (users.length === 0) {
+    //     return;
+    //   }
+    //   console.log(users);
+
+    //   // usersIdsに更新分のuserのpeerIdから作られた新しい配列と既存のusersIdsの比較更新分をcancatしてひっつける
+    //   let existUsersIds = [];
+    //   miro.board.widgets.get({type: 'text'}).then((array) =>{
+    //     existUsersIds = array.map(function(text) {
+    //       console.log(text);
+    //       console.log("id" in text);
+    //       if (!text.hasOwnProperty("metadata")) {
+    //         console.log("1");
+    //         return;
+    //       }
+    //       if (!text["metadata"].hasOwnProperty("3074457356456340435")) {
+    //         console.log("2");
+    //         return;
+    //       }
+    //       if (!text["metadata"]["3074457356456340435"].hasOwnProperty("id")) {
+    //         console.log("3");
+    //         return;
+    //       }
+    //       console.log(text["metadata"]["3074457356456340435"]["id"]);
+    //       return text["metadata"]["3074457356456340435"]["id"];
+    //     });
+    //     console.log(existUsersIds);
+    //     existUsersIds = existUsersIds.filter(Boolean);
+    //     console.log(existUsersIds);
+
+    //     const itemIds = users.map(function(item) {
+    //       return item.peerId;
+    //     });
+    //     usersIds = itemIds.filter(function(user, index) {
+    //       return itemIds.indexOf(user) === index;
+    //     });
+    //     console.log(usersIds)
+
+    //     usersIds = existUsersIds.concat(
+    //       usersIds
+    //     );
+
+    //     // usersIds = existUsersIds.concat(
+    //     //   users.map(function(user) {
+    //     //     return user.peerId;
+    //     //   }).filter(i => existUsersIds.indexOf(i) === -1)
+    //     // );
+    //     console.log(usersIds);
+
+    //     // const itemIds = array.map(function(item) {
+    //     //   return item.id;
+    //     // });
+    //     // const kindOfusers = users.filter(function(user, index) {
+    //     //   return usersIds.indexOf(user.peerId) === index;
+    //     // });
+
+    //     // const uniqueItemUseES2015 = users.filter((item, index, array) => {
+    //     //   return array.findIndex(item2 => item.peerId === item2.Id) === index;
+    //     // });
+    //     // console.log(uniqueItemUseES2015);
+
+    //     for (let i = 0; i < usersIds.length; i++) {
+    //       console.log(existUsersIds.length);
+    //       console.log(i);
+    //       if (existUsersIds.length > i) {
+    //         console.log("existUsersIds = OK");
+    //         continue;
+    //       }
+    //       miro.board.widgets.create({
+    //         type: 'text',
+    //         // text: usersIds[i]["nickname"],
+    //         text: users.find(element => element.peerId === usersIds[i]),
+    //         x: 0,
+    //         y: 0 + 350 * i,
+    //         metadata: {
+    //             "3074457356456340435": {
+    //               "id": usersIds[i]["peerId"]
+    //             }
+    //           },
+    //       })
+    //       // miro.board.widgets.create({
+    //       //   type: "image",
+    //       //   url: kindOfusers[i]["userPhoto"],
+    //       //   x: 100,
+    //       //   y: 0 + 350 * i
+    //       // })
+    //     }
+
+    //     if (!initUnixtime) {
+    //       initUnixtime = existImages[0];
+    //     }
+
+    //     maxTimestamp = Math.max.apply(null,users.map(x => x.time));
+
+    //     const intervalTime = maxTimestamp - initUnixtime;
+
+    //     let dateTime;
+    //     let unixtime;
+    //     for (let i = 0; i < intervalTime / 600000 ; i++) {
+    //       unixtime = initUnixtime + Math.floor(600000 * i);
+    //       dateTime = new Date(unixtime);
+    //       miro.board.widgets.create({
+    //         type: 'text',
+    //         width: 55,
+    //         x: 210 + 50 + 600 * i * 30,
+    //         y: -100,
+    //         // y: (( i + 2 ) % 2) === 0 ? -150 : -100,
+    //         // style: {
+    //           // allowed values: "center", "right", "left"
+    //         //   textAlign: "right", // default: "center"
+    //         // },
+    //         text: dateTime.toLocaleTimeString() + '',
+    //         metadata: {
+    //             "3074457356456340435": {
+    //               "kind": "timeScale"
+    //             }
+    //           },
+    //       })
+    //     }
+    //     let i = 0;
+    //     function creatImage() {
+    //       if (users.length <= i) {
+    //         return;
+    //       }
+    //       // miro.board.widgets.get({type: 'image'}).then((array) =>{
+    //       //     existImages = array.map(function(image) {
+    //       //     return image["metadata"]["3074457356456340435"]["time"];
+    //       //   });
+    //       // })
+    //       const idPosition = usersIds.findIndex(
+    //           (element) => element.peerId === users[i].peerId
+    //         )
+    //       console.log(idPosition);
+    //         miro.board.widgets.create({
+    //           type: "image",
+    //           url: users[i]["image"],
+    //           x: 210 + 50 + Number((users[i]["time"] - initUnixtime) / 1000) * 30 ,
+    //           y: 0 + 350 * idPosition,
+    //           scale: 0.2,
+    //           metadata: {
+    //             "3074457356456340435": {
+    //               "time": users[i]["time"]
+    //             }
+    //           },
+    //         }).then(() => {
+    //             ++i;
+    //             setTimeout(creatImage,100);
+    //           }
+    //         )
+    //     }
+    //     creatImage();
+    //   })
+    // }
 
 
       // if (!users){
