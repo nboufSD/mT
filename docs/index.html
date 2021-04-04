@@ -162,6 +162,34 @@
           }
         }
 
+        maxTimestamp = Math.max.apply(null,users.map(x => x.time));
+
+        const intervalTime = maxTimestamp - initUnixtime;
+
+        let dateTime;
+        let unixtime;
+        for (let i = 0; i < intervalTime / 600000 ; i++) {
+          unixtime = initUnixtime + Math.floor(600000 * i);
+          dateTime = new Date(unixtime);
+          miro.board.widgets.create({
+            type: 'text',
+            width: 55,
+            x: 210 + 50 + 600 * i * 30,
+            y: -100,
+            // y: (( i + 2 ) % 2) === 0 ? -150 : -100,
+            // style: {
+              // allowed values: "center", "right", "left"
+            //   textAlign: "right", // default: "center"
+            // },
+            text: dateTime.toLocaleTimeString() + '',
+            metadata: {
+                "3074457356456340435": {
+                  "kind": "timeScale"
+                }
+              },
+          })
+        }
+
       // let existImages = [];
       let i = 0;
       function creatImage() {
