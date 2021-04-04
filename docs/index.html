@@ -71,7 +71,7 @@
       console.log(users);
 
       // usersIdsに更新分のuserのpeerIdから作られた新しい配列と既存のusersIdsの比較更新分をcancatしてひっつける
-      let existUsersIds;
+      let existUsersIds = [];
       miro.board.widgets.get({type: 'text'}).then((array) =>{
         existUsersIds = array.map(function(text) {
           console.log(text);
