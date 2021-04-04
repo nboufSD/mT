@@ -138,9 +138,13 @@
           if (existImages.length !== 0) {
             // すでにイメージが貼られていたらそのイメージ郡の最小のtimeを初期時間とする
             initUnixtime = existImages[0];
+            console.log("initUnixtime");
+            console.log(initUnixtime);
           } else {
             // 何もイメージが貼られていなければ、usersの最小のtimeを初期値とする
             initUnixtime = users[0]["time"]
+            console.log("initUnixtime");
+            console.log(initUnixtime);
           }
         }
 
