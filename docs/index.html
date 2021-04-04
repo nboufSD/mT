@@ -133,6 +133,44 @@
           //   y: 0 + 350 * i
           // })
         }
+
+        if (!initUnixtime) {
+          initUnixtime = existImages[0];
+        }
+
+      let existImages = [];
+      function creatImage() {
+        // miro.board.widgets.get({type: 'image'}).then((array) =>{
+        //     existImages = array.map(function(image) {
+        //     return image["metadata"]["3074457356456340435"]["time"];
+        //   });
+        // })
+        let i = existImages.length;
+        console.log(i);
+        console.log(users[i].peerId);
+
+        const idPosition = totalIds.findIndex(
+            (element) => element === users[i].peerId
+          )
+          console.log("WAIT");
+          miro.board.widgets.create({
+            type: "image",
+            url: users[i]["image"],
+            x: 210 + 50 + Number((users[i]["time"] - initUnixtime) / 1000) * 30 ,
+            y: 0 + 350 * idPosition,
+            scale: 0.2,
+            metadata: {
+              "3074457356456340435": {
+                "time": users[i]["time"]
+              }
+            },
+          })
+          ++i;
+        }
+
+        if (i < users.length) {
+          setTimeout(creatImage,100);
+        }
       })
     }
     //   users = response;
