@@ -98,8 +98,30 @@
           console.log(text["metadata"]["3074457356456340435"]["id"]);
           return text["metadata"]["3074457356456340435"];
         });
+
+        let existTimes = [];
+        existTimes = array.map(function(text) {
+          console.log(text);
+          if (!text.hasOwnProperty("metadata")) {
+            console.log("1");
+            return;
+          }
+          if (!text["metadata"].hasOwnProperty("3074457356456340435")) {
+            console.log("2");
+            return;
+          }
+          if (!text["metadata"]["3074457356456340435"].hasOwnProperty("time")) {
+            console.log("3");
+            return;
+          }
+          console.log(text["metadata"]["3074457356456340435"]["time"]);
+          return text["metadata"]["3074457356456340435"];
+        });
+
         existUsersIds = existUsersIds.filter(Boolean);
+        existTimes = existTimes.filter(Boolean);
         console.log(existUsersIds);
+        console.log(existTimes);
         existUsersIds.sort(function(a, b) {
           if (a.order < b.order) {
             console.log(a);
@@ -169,6 +191,9 @@
         let dateTime;
         let unixtime;
         for (let i = 0; i < intervalTime / 600000 ; i++) {
+          if (existTimes.length > i) {
+            continue;
+          }
           unixtime = initUnixtime + Math.floor(600000 * i);
           dateTime = new Date(unixtime);
           miro.board.widgets.create({
@@ -184,7 +209,7 @@
             text: dateTime.toLocaleTimeString() + '',
             metadata: {
                 "3074457356456340435": {
-                  "kind": "timeScale"
+                  "time": dateTime.toLocaleTimeString() + ''
                 }
               },
           })
