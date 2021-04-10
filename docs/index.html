@@ -152,10 +152,11 @@
             console.log("existUsersIds = OK");
             continue;
           }
+          const index = users.findIndex(item => item.peerId === totalIds[i])
           miro.board.widgets.create({
             type: 'text',
             // text: usersIds[i]["userName"],
-            text: totalIds[i],
+            text: users[index]["userName"],
             x: 0,
             y: 0 + 350 * i,
             metadata: {
