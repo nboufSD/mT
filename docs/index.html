@@ -44,6 +44,7 @@
                   console.log(existImages);
                   console.log("maxTimestamp");
                   console.log(maxTimestamp);
+                  console.log("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId);
                   fetch("https://asia-northeast1-comado-12e38.cloudfunctions.net/getRecords?time=" + maxTimestamp + '' + "&boardId=" + boardId)
                     .then((response) => {
                         return response.json();　//ここでBodyからJSONを返す
@@ -152,7 +153,7 @@
           }
           miro.board.widgets.create({
             type: 'text',
-            // text: usersIds[i]["nickname"],
+            // text: usersIds[i]["userName"],
             text: totalIds[i],
             x: 0,
             y: 0 + 350 * i,
@@ -321,7 +322,7 @@
     //       }
     //       miro.board.widgets.create({
     //         type: 'text',
-    //         // text: usersIds[i]["nickname"],
+    //         // text: usersIds[i]["userName"],
     //         text: users.find(element => element.peerId === usersIds[i]),
     //         x: 0,
     //         y: 0 + 350 * i,
@@ -425,7 +426,7 @@
       // for (let i = 0; i < kindOfusers.length; i++) {
       //   miro.board.widgets.create({
       //     type: 'text',
-      //     text: kindOfusers[i]["nickname"],
+      //     text: kindOfusers[i]["userName"],
       //     x: 0,
       //     y: 0 + 350 * i,
       //   })
