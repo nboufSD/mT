@@ -32,9 +32,16 @@
                 miro.board.widgets.get({type: 'image'}).then((array) =>{
                   if (array.length !== 0) {
                     existImages = array.map(function(image) {
+                      if (!image.hasOwnProperty("metadata")) {
+                        console.log("not have metafata of image");
+                        return NaN;
+                      }
                       return image["metadata"]["3074457356456340435"]["time"];
                     });
                   }
+                  console.log(existImages);
+                  existImages = existImages.filter(Boolean);
+                  console.log(existImages);
                   if (existImages.length !== 0) {
                     maxTimestamp = Math.max.apply(null,existImages);
                   } else {
@@ -193,16 +200,16 @@
 
         let dateTime;
         let unixtime;
-        for (let i = 0; i < intervalTime / 600000 ; i++) {
+        for (let i = 0; i < intervalTime / 60000 ; i++) {
           if (existTimes.length > i) {
             continue;
           }
-          unixtime = initUnixtime + Math.floor(600000 * i);
+          unixtime = initUnixtime + Math.floor(60000 * i);
           dateTime = new Date(unixtime);
           miro.board.widgets.create({
             type: 'text',
             width: 55,
-            x: 210 + 50 + 600 * i * 30,
+            x: 210 + 50 + 60 * i * 30,
             y: -100,
             // y: (( i + 2 ) % 2) === 0 ? -150 : -100,
             // style: {
