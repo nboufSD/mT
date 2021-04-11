@@ -32,12 +32,12 @@
                 miro.board.widgets.get({type: 'image'}).then((array) =>{
                   if (array.length !== 0) {
                     existImages = array.map(function(image) {
-                      if (!image.hasOwnProperty("metadata")) {
+                      console.log(image);
+                      if (!image["metadata"].hasOwnProperty("time")) {
                         console.log("not have metafata of image");
                         return NaN;
-                      } else {
-                        return image["metadata"]["3074457356456340435"]["time"];
                       }
+                      return image["metadata"]["3074457356456340435"]["time"];
                     });
                   }
                   console.log(existImages);
