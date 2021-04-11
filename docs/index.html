@@ -35,8 +35,9 @@
                       if (!image.hasOwnProperty("metadata")) {
                         console.log("not have metafata of image");
                         return NaN;
+                      } else {
+                        return image["metadata"]["3074457356456340435"]["time"];
                       }
-                      return image["metadata"]["3074457356456340435"]["time"];
                     });
                   }
                   console.log(existImages);
